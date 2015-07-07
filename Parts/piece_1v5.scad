@@ -125,50 +125,6 @@ difference()
         [diam_bague/2+chanfrein,-1],
         [0,-1]
         ]);
-
-   
-    //courroie 1
-    translate([30.01,-16.5,hauteur/3-2+0.01])
-        rotate([0,-180,0])
-        {
-            cube([20,6.51 ,0.63]);
-            
-            r=0.75;
-            h=6.51;
-            // small number
-            e=.02;
-            for ( i = [0 : 9] )
-            {
-                translate([1+i*2,0,0.63])
-                    rotate([-90,90,0])
-                        difference()
-                        {
-                            cylinder(h,r,r,$fn=facettes);
-                            translate ([0,-(r+e),-e]) cube([2*(r+e),2*(r+e),h+2*e]);
-                        }
-            }
-        }
-    
-    //courroie 2
-    translate([19.99,-16.5,2*hauteur/3+8+2-0.01])
-    {   
-        cube([20,6.51 ,0.63]);
-        
-        r=0.75;
-        h=6.51;
-        // small number
-        e=.02;
-        for ( i = [0 : 9] )
-        {
-            translate([1+i*2,0,0.63])
-            rotate([-90,90,0])
-            difference()
-            {
-                cylinder(h,r,r,$fn=facettes);
-                translate ([0,-(r+e),-e]) cube([2*(r+e),2*(r+e),h+2*e]);
-            }
-        }
-    }
  // vis de serrage courroie 1
     translate([19,-4.5,-1])
         cylinder(h=hauteur+2,d=trou_de_vis_3,$fn=facettes);
@@ -178,24 +134,6 @@ difference()
      // Ecrous de serrage courroie
     difference_ecrou = 9-epaisseur_ecrou_3/2;
     // Passage ecrou 3
-/*
-    translate([15,-largeur_ecrou_3/2-21,hauteur/2-difference_ecrou])
-    {
-        cube([hauteur_ecrou_3+10,largeur_ecrou_3 ,epaisseur_ecrou_3]);
-
-    translate([0,largeur_ecrou_3/2,epaisseur_ecrou_3])
-        rotate([0,180,90])
-            linear_extrude(height=epaisseur_ecrou_3)
-            polygon( points=
-            [[0,-hauteur_ecrou_3/2],//0
-            [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(-30)],//1
-            [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(30)],//2
-            [0,hauteur_ecrou_3/2],//3
-            [-largeur_ecrou_3/2,hauteur_ecrou_3/2*cos(60)],//4
-            [-largeur_ecrou_3/2,-hauteur_ecrou_3/2*cos(60)]//5
-            ]);
-    }
- */
      translate([15,-21,2*hauteur/3-epaisseur_ecrou_3-3])
      {
         rotate([0,0,-90])
@@ -301,12 +239,69 @@ difference()
             }
         }
     }
-    translate([9,25.5-4.5,-1])
-        cylinder(h=10,d=trou_de_vis_3,$fn=facettes);
+    translate([9,21,-0.01])
+        cylinder(h=6.02,d=trou_de_vis_3,$fn=facettes);
     // vis de serrage courroie 2   
-    translate([5,25.5-21,-1])
-        cylinder(h=10,d=trou_de_vis_3,$fn=facettes);
-    translate([-10,25.5,-1])
-    cylinder(h=10,d=25,$fn=facettes);
+    translate([5,4.5,-0.01])
+        cylinder(h=6.02,d=trou_de_vis_3,$fn=facettes);
+    translate([-10,25.5,-0.01])
+    cylinder(h=6.02,d=25,$fn=facettes);
 }
 
+translate([10,-25.5,2*hauteur/3+2])
+difference()
+{
+    //serrage de la courroie
+    
+            linear_extrude(height=6)
+                square([14,25.5]);
+    
+    translate([9,21,-0.01])
+        cylinder(h=6.02,d=trou_de_vis_3,$fn=facettes);
+    // vis de serrage courroie 2   
+    translate([5,4.5,-0.01])
+        cylinder(h=6.02,d=trou_de_vis_3,$fn=facettes);
+    translate([-10,25.5,-0.01])
+    cylinder(h=6.02,d=25,$fn=facettes);
+}
+
+translate([10,-25.5,2*hauteur/3+2+6+2])
+difference()
+{
+    //serrage de la courroie
+    
+            linear_extrude(height=6)
+                square([14,25.5]);
+    //courroie 1
+    color("blue")
+    translate([-0.01,9,-0.01])
+        cube([20,6.51 ,0.65]);
+
+    translate([20.01,15.51,0])
+    {
+        rotate([0,0,180])
+        {
+            r=0.75;
+            h=6.51;
+            // small number
+            e=.02;
+            for ( i = [0 : 9] )
+            {
+                translate([1+i*2,0,0.63])
+                    rotate([-90,90,0])
+                        difference()
+                        {
+                            cylinder(h,r,r,$fn=facettes);
+                            translate ([0,-(r+e),-e]) cube([2*(r+e),2*(r+e),h+2*e]);
+                        }
+            }
+        }
+    }
+    translate([9,21,-0.01])
+        cylinder(h=6.02,d=trou_de_vis_3,$fn=facettes);
+    // vis de serrage courroie 2   
+    translate([5,4.5,-0.01])
+        cylinder(h=6.02,d=trou_de_vis_3,$fn=facettes);
+    translate([-10,25.5,-0.01])
+    cylinder(h=6.02,d=25,$fn=facettes);
+}

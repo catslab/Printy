@@ -107,6 +107,11 @@ cylinder(h = 280,
     d=axe_diam, center=false,$fn=facettes);
 }
 
+color("pink")
 translate([80+30,80+30,10])
-rotate([0,0,0])
+rotate([0,0,180])
     import("charriot.stl");
+color("silver")
+translate([80+24,80+50,-52])
+rotate([0,0,-90])
+import("bloc_impression.stl");
