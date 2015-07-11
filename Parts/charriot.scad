@@ -67,7 +67,6 @@ difference()
         translate([taille_x/2-6,taille_y/2,-0.01])
         cylinder(h=hauteur_charriot+.02,d=diam_pions_centrage,$fn=facettes);
     }
- 
  }
  
  

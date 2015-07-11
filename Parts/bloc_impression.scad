@@ -116,6 +116,49 @@ difference()
 
 }
 
+// heater bloc
+translate([20-9-8,y_fil-4.5,-11.5-2.1])
+{
+heater();
+     translate([8,4.5,-1.5])
+    buse();
+}
+
+translate([20+9+8,y_fil+4.5,-11.5-2.1])
+rotate([0,0,180])
+{
+    heater();
+    translate([8,4.5,-1.5])
+    buse();
+}
+
+
+module heater()
+{
+     difference()
+    {
+cube([16,20,11.5]);
+translate([8,4.5,-0.01])
+cylinder(h=11.52,d=5.5,$fn=facettes);
+}
+}
+module buse()
+{
+cylinder(h=1.5,d=5,$fn=facettes);
+    translate([0,0,-4.5])
+cylinder(h=2,r1=.5,r2=3.35,$fn=facettes);
+    translate([0,0,-3])
+   linear_extrude(height =3) 
+    polygon( points=
+        [[-4,0],//0
+    [-2,3.5],
+    [2,3.5],
+    [4,0],
+    [2,-3.5],
+    [-2,-3.5]
+    ]);
+    
+}
 module extrusion_1()
  {
      rotate_extrude($fn=facettes) 
