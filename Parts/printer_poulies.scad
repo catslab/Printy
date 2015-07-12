@@ -15,21 +15,31 @@ largeur_charriot = 60;
 longueur_guide = 400;
 
 largeur_plateau = 320;
+long_glissiere_plateau = 400;
+
+hauteur_cage = 430;
+hauteur_profile = hauteur_cage + 55;
+
+hauteur_barre_X_bas = -45;
+longueur_sfu = 420;
+
+hauteur_plateau = 0;
+
 // cadre
 color("purple")
 {
     //arriere gauche
-    translate([-barre_dim/2,-barre_dim/2,-400])
-        cube([barre_dim,barre_dim,455]);
+    translate([-barre_dim/2,-barre_dim/2,-hauteur_cage])
+        cube([barre_dim,barre_dim,hauteur_profile]);
     //arriere droite
-    translate([-barre_dim/2,largeur_interne+barre_dim/2,-400])
-        cube([barre_dim,barre_dim,455]);
+    translate([-barre_dim/2,largeur_interne+barre_dim/2,-hauteur_cage])
+        cube([barre_dim,barre_dim,hauteur_profile]);
     //devant gauche
-    translate([largeur_interne+barre_dim/2,-barre_dim/2,-400])
-        cube([barre_dim,barre_dim,455]);
+    translate([largeur_interne+barre_dim/2,-barre_dim/2,-hauteur_cage])
+        cube([barre_dim,barre_dim,hauteur_profile]);
     //devant droite
-    translate([largeur_interne+barre_dim/2,largeur_interne+barre_dim/2,-400])
-        cube([barre_dim,barre_dim,455]);
+    translate([largeur_interne+barre_dim/2,largeur_interne+barre_dim/2,-hauteur_cage])
+        cube([barre_dim,barre_dim,hauteur_profile]);
 }
     
 //barres 2020
@@ -37,11 +47,11 @@ color("silver")
 {
 //barre axe X bas
     //gauche
-    translate([barre_dim/2,-barre_dim/2,-35])
+    translate([barre_dim/2,-barre_dim/2,hauteur_barre_X_bas])
         rotate([0,90,0])
             cube([barre_dim,barre_dim,largeur_interne]);
     //droite
-    translate([barre_dim/2,largeur_interne+barre_dim/2,-35])
+    translate([barre_dim/2,largeur_interne+barre_dim/2,hauteur_barre_X_bas])
         rotate([0,90,0])
             cube([barre_dim,barre_dim,largeur_interne]);
 //barre axe Y bas   
@@ -62,25 +72,25 @@ color("silver")
        
 //barre axe X base 
     // gauche
-    translate([barre_dim/2,-barre_dim/2,-400])
+    translate([barre_dim/2,-barre_dim/2,-hauteur_cage])
         rotate([0,90,0])
-            cube([barre_dim*3,barre_dim,largeur_interne]); 
+            cube([barre_dim*4,barre_dim,largeur_interne]); 
     // droite
-    translate([barre_dim/2,largeur_interne+barre_dim/2,-400])
+    translate([barre_dim/2,largeur_interne+barre_dim/2,-hauteur_cage])
         rotate([0,90,0])
-            cube([barre_dim*3,barre_dim,largeur_interne]); 
+            cube([barre_dim*4,barre_dim,largeur_interne]); 
 }  
 color("grey")
 {
 //barre axe X base 
     // derriere
-    translate([-barre_dim/2,-barre_dim/2,-400])
+    translate([-barre_dim/2,-barre_dim/2,-hauteur_cage])
         rotate([-90,0,0])
-            cube([barre_dim,barre_dim*3,largeur_interne+barre_dim*2]); 
+            cube([barre_dim,barre_dim*4,largeur_interne+barre_dim*2]); 
     // devant
-    translate([largeur_interne+barre_dim/2,-barre_dim/2,-400])
+    translate([largeur_interne+barre_dim/2,-barre_dim/2,-hauteur_cage])
         rotate([-90,0,0])
-            cube([barre_dim,barre_dim*3,largeur_interne+barre_dim*2]); 
+            cube([barre_dim,barre_dim*4,largeur_interne+barre_dim*2]); 
 }
 // axes de transmission
 color("red")
@@ -255,23 +265,32 @@ import("bloc_impression.stl");
 //Plateau
 color("grey")
 {
-translate([barre_dim/2+largeur_interne/2-largeur_plateau/2,barre_dim/2+largeur_interne/2-largeur_plateau/2,-75])
+translate([barre_dim/2+largeur_interne/2-largeur_plateau/2,barre_dim/2+largeur_interne/2-largeur_plateau/2,hauteur_plateau-75])
 cube([largeur_plateau,largeur_plateau,3]);
+/*
 translate([barre_dim/2+largeur_interne/2-largeur_plateau/2,barre_dim/2+largeur_interne/2-largeur_plateau/2,-375])
 cube([largeur_plateau,largeur_plateau,3]);
+*/
 }
 
 largeur_support = largeur_plateau + 50;
-translate([barre_dim/2+largeur_interne/2-largeur_support/2,barre_dim/2+largeur_interne/2-largeur_support/2,-90])
+translate([barre_dim/2+largeur_interne/2-largeur_support/2,barre_dim/2+largeur_interne/2-largeur_support/2,hauteur_plateau-90])
 cube([largeur_support,largeur_support,16]);
+/*
 translate([barre_dim/2+largeur_interne/2-largeur_support/2,barre_dim/2+largeur_interne/2-largeur_support/2,-390])
 cube([largeur_support,largeur_support,16]);
-
+*/
 // roulements des axes
 translate([barre_dim/2+18,0,0])
 rotate([90,0,90])
 KP000();
 translate([barre_dim/2+largeur_interne-18,0,0])
+rotate([90,0,-90])
+KP000();
+translate([barre_dim/2+18,largeur_interne+barre_dim,0])
+rotate([90,0,90])
+KP000();
+translate([barre_dim/2+largeur_interne-18,largeur_interne+barre_dim,0])
 rotate([90,0,-90])
 KP000();
 
@@ -281,41 +300,93 @@ KP000();
 translate([0,barre_dim/2+largeur_interne-18,20])
 rotate([90,0,0])
 KP000();
-
+translate([largeur_interne+barre_dim,barre_dim/2+18,20])
+rotate([-90,0,0])
+KP000();
+translate([largeur_interne+barre_dim,barre_dim/2+largeur_interne-18,20])
+rotate([90,0,0])
+KP000();
 
 //screw axe z
 milieu = barre_dim/2+largeur_interne/2;
-translate([milieu,barre_dim/2+15,-35-barre_dim/2])
+translate([milieu,barre_dim/2+15,hauteur_barre_X_bas-barre_dim/2])
 rotate([-90,90,0])
 KP08();
-translate([milieu,barre_dim/2+largeur_interne-15,-35-barre_dim/2])
+translate([milieu,barre_dim/2+largeur_interne-15,hauteur_barre_X_bas-barre_dim/2])
 rotate([90,90,0])
 KP08();
 
-translate([milieu,barre_dim/2+15,-400-barre_dim/2])
+translate([milieu,barre_dim/2+15,-hauteur_cage-barre_dim*1.5])
 rotate([-90,90,0])
 KP08();
-translate([milieu,barre_dim/2+largeur_interne-15,-400-barre_dim/2])
+translate([milieu,barre_dim/2+largeur_interne-15,-hauteur_cage-barre_dim*1.5])
 rotate([90,90,0])
 KP08();
 
-translate([milieu,barre_dim/2+15,-400-barre_dim])
-cylinder(h = 400,d=12,$fn=facettes);
-translate([milieu,barre_dim/2+largeur_interne-15,-400-barre_dim])
-cylinder(h = 400,d=12,$fn=facettes);
+translate([milieu,barre_dim/2+15,-hauteur_cage-barre_dim*2+3])
+cylinder(h = longueur_sfu,d=12,$fn=facettes);
+translate([milieu,barre_dim/2+largeur_interne-15,-hauteur_cage-barre_dim*2+3])
+cylinder(h = longueur_sfu,d=12,$fn=facettes);
 
-translate([milieu,barre_dim/2+15,-110])
+translate([milieu,barre_dim/2+15,hauteur_plateau-125])
     rotate([0,0,0])
         SFU1204_nut();
-translate([milieu,barre_dim/2+largeur_interne-15,-110])
+translate([milieu,barre_dim/2+largeur_interne-15,hauteur_plateau-125])
     rotate([0,0,0])
         SFU1204_nut();
-translate([milieu,barre_dim/2+15,-115])
-    support_nut();
-translate([milieu,barre_dim/2+largeur_interne-15,-115])
+translate([milieu,barre_dim/2+15,hauteur_plateau-115])
+    support_nut2();
+translate([milieu,barre_dim/2+largeur_interne-15,hauteur_plateau-115])
     rotate([0,0,180])
-        support_nut();
+        support_nut2();
 
+epaisseur_KP08 = 13;
+decalage_KP08 = 2;
+translate([milieu,barre_dim/2+15,-hauteur_cage-barre_dim*1.5+epaisseur_KP08/2+decalage_KP08+epaisseur_poulie])
+rotate([180,0,0])
+poulie_32();
+translate([milieu,barre_dim/2+largeur_interne-15,-hauteur_cage-barre_dim*1.5+epaisseur_KP08/2+decalage_KP08+epaisseur_poulie])
+rotate([180,0,0])
+poulie_32();
+
+//soutient moteur Z   
+color("silver")
+{
+    translate([milieu+30,barre_dim/2,-hauteur_cage-barre_dim])
+        rotate([-90,0,0])
+            cube([barre_dim,barre_dim,largeur_interne]);
+     translate([milieu-barre_dim*2.5,barre_dim/2,-hauteur_cage-barre_dim])
+        rotate([-90,0,0])
+            cube([barre_dim,barre_dim,largeur_interne]);
+    translate([milieu-barre_dim*1.5,barre_dim/2+largeur_interne/4,-hauteur_cage-barre_dim])
+        rotate([-90,0,0])
+            cube([3*barre_dim,barre_dim,largeur_interne/2]);
+}
+
+translate([milieu+barre_dim*2.5+21,milieu,-hauteur_cage-barre_dim-47])
+moteur_pap();
+translate([milieu+barre_dim*2.5+21,milieu,-hauteur_cage-barre_dim*1.5+epaisseur_KP08/2+decalage_KP08+9])
+poulie_32();
+color("black")
+{
+    //parallèle a  Y
+    translate([milieu-20.3/2,10+15,-hauteur_cage-barre_dim*1.5+epaisseur_KP08/2+decalage_KP08+9+6+epaisseur_flanc+0.25])
+    rotate([-90,0,90])
+    cube([largeur_interne-30,6,0.63]);
+    translate([milieu+20.3/2,10+15,-hauteur_cage-barre_dim*1.5+epaisseur_KP08/2+decalage_KP08+9+6+epaisseur_flanc+0.25])
+    rotate([-90,0,90])
+    cube([largeur_interne/2-20.3/2-15,6,0.63]);
+    translate([milieu+20.3/2,10+largeur_interne/2+20.3/2,-hauteur_cage-barre_dim*1.5+epaisseur_KP08/2+decalage_KP08+9+6+epaisseur_flanc+0.25])
+    rotate([-90,0,90])
+    cube([largeur_interne/2-20.3/2-15,6,0.63]);
+    
+    translate([milieu+20.3/2,milieu-20.3/2,-hauteur_cage-barre_dim*1.5+epaisseur_KP08/2+decalage_KP08+9+6+epaisseur_flanc+0.25])
+    rotate([-90,0,0])
+    cube([40+21,6,0.63]);
+    translate([milieu+20.3/2,milieu+20.3/2,-hauteur_cage-barre_dim*1.5+epaisseur_KP08/2+decalage_KP08+9+6+epaisseur_flanc+0.25])
+    rotate([-90,0,0])
+    cube([40+21,6,0.63]);
+}
 
 /*
 //glissière plateau v1
@@ -362,45 +433,99 @@ retrait_X=10;
 milieu_X = barre_dim/2+largeur_interne/2;
 //glissière plateau v2
 // bas gauche
-translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,-400-barre_dim/2])
+translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,-hauteur_cage-barre_dim/2])
     rotate([-90,90,0])
         SK10();
-translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,-400-barre_dim/2])
+translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,-hauteur_cage-barre_dim/2])
     rotate([-90,90,0])
         SK10();
 // haut gauche
-translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,-35-barre_dim/2])
+translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,hauteur_barre_X_bas-barre_dim/2])
     rotate([-90,90,0])
         SK10();
-translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,-35-barre_dim/2])
+translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,hauteur_barre_X_bas-barre_dim/2])
     rotate([-90,90,0])
         SK10();
 // bas droite
-translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,-400-barre_dim/2])
+translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,-hauteur_cage-barre_dim/2])
     rotate([90,90,0])
         SK10();
-translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,-400-barre_dim/2])
+translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,-hauteur_cage-barre_dim/2])
     rotate([90,90,0])
         SK10();
 // haut droite
-translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,-35-barre_dim/2])
+translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_barre_X_bas-barre_dim/2])
     rotate([90,90,0])
         SK10();
-translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,-35-barre_dim/2])
+translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_barre_X_bas-barre_dim/2])
     rotate([90,90,0])
         SK10();
+
+ep_sk10 = 14;
         
 color("green")
 {
-translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,-400-barre_dim/2-7])
-cylinder(h = 400,d=10,$fn=facettes);
-translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,-400-barre_dim/2-7])
-cylinder(h = 400,d=10,$fn=facettes);
-translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,-400-barre_dim/2-7])
-cylinder(h = 400,d=10,$fn=facettes);
-translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,-400-barre_dim/2-7])
-cylinder(h = 400,d=10,$fn=facettes);
+translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,-hauteur_cage-barre_dim/2-ep_sk10/2])
+cylinder(h = long_glissiere_plateau,d=10,$fn=facettes);
+translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,-hauteur_cage-barre_dim/2-ep_sk10/2])
+cylinder(h = long_glissiere_plateau,d=10,$fn=facettes);
+translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,-hauteur_cage-barre_dim/2-ep_sk10/2])
+cylinder(h = long_glissiere_plateau,d=10,$fn=facettes);
+translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,-hauteur_cage-barre_dim/2-ep_sk10/2])
+cylinder(h = long_glissiere_plateau,d=10,$fn=facettes);
 }
+
+// glissieres sur les axes
+translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-121])
+LMH10UU();
+translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-121])
+LMH10UU();
+translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,hauteur_plateau-121])
+LMH10UU();
+translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,hauteur_plateau-121])
+LMH10UU();
+
+translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-115])
+    rotate([180,180,0])
+        support_LMH10UU_2();
+translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-110])
+    rotate([180,0,0])
+        support_LMH10UU_2();
+
+translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,hauteur_plateau-110])
+    rotate([0,180,0])
+        support_LMH10UU_2();
+translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,hauteur_plateau-115])
+    support_LMH10UU_2();
+
+// support plateau
+extremite = barre_dim/2+(largeur_interne-largeur_support)/2;
+color("silver")
+{
+//barre axe X
+    //gauche
+    translate([extremite,extremite,hauteur_plateau-90])
+        rotate([0,90,0])
+            cube([barre_dim,barre_dim,largeur_support]);
+    //droite
+    translate([extremite,extremite+largeur_support-barre_dim,hauteur_plateau-90])
+        rotate([0,90,0])
+            cube([barre_dim,barre_dim,largeur_support]);
+}
+color("grey")
+{
+//barre axe Y
+    //derriere
+    translate([extremite,extremite+barre_dim,hauteur_plateau-90])
+        rotate([-90,0,0])
+            cube([barre_dim,barre_dim,largeur_support-barre_dim*2]);
+    //devant
+    translate([extremite+largeur_support-barre_dim,extremite+barre_dim,hauteur_plateau-90])
+        rotate([-90,0,0])
+            cube([barre_dim,barre_dim,largeur_support-barre_dim*2]);
+}
+
+
 
 module SK10() 
 { 
@@ -473,79 +598,199 @@ module KP000()
 module SFU1204_nut()
 {
     color("blue")
-    difference()
     {
-        union()
+        difference()
         {
-            cylinder(h=10,d=40,$fn=facettes);
-            translate([0,0,10])
-                cylinder(h=30,d=24,$fn=facettes);
+            union()
+            {
+                cylinder(h=10,d=40,$fn=facettes);
+                translate([0,0,10])
+                    cylinder(h=30,d=24,$fn=facettes);
+            }
+            translate([0,0,-0.01])
+                cylinder(h=40.02,d=12,$fn=facettes);
+             translate([-20,15,-0.01])
+                cube([40,5,10.02]);
+            translate([-20,-20,-0.01])
+                cube([40,5,10.02]);
+            translate([-16,0,-0.01])
+                 cylinder(h=10.02,d=4.5,$fn=facettes);
+            translate([16,0,-0.01])
+                 cylinder(h=10.02,d=4.5,$fn=facettes);
         }
-        translate([0,0,-0.01])
-            cylinder(h=40.02,d=12,$fn=facettes);
-         translate([-20,15,-0.01])
-            cube([40,5,10.02]);
-        translate([-20,-20,-0.01])
-            cube([40,5,10.02]);
-        translate([-16,0,-0.01])
-             cylinder(h=10.02,d=4.5,$fn=facettes);
-        translate([16,0,-0.01])
-             cylinder(h=10.02,d=4.5,$fn=facettes);
     }
 }
 
 module support_nut()
 {
     color("cyan")
-    translate([-40,-15,0])
+    {
+        translate([-40,-15,0])
+        {
+            difference()
+            {
+                union()
+                {
+                    translate([20,0,0])
+                        cube([40,35,5]);
+                    translate([0,35,0])
+                        cube([80,20,5]);
+                }
+                translate([10,45,-0.01])
+                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                translate([30,45,-0.01])
+                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                translate([50,45,-0.01])
+                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                translate([70,45,-0.01])
+                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                translate([40,15,-0.01])
+                    cylinder(h=5.02,d=24.5,$fn=facettes);
+                translate([24,15,-0.01])
+                    cylinder(h=5.02,d=4.5,$fn=facettes);
+                translate([56,15,-0.01])
+                    cylinder(h=5.02,d=4.5,$fn=facettes);
+            }
+        }
+    }
+}
+
+
+module support_LMH10UU()
+{
+    color("cyan")
+    translate([-30,-15,0])
+    difference()
+    {
+
+            cube([50,70,5]);
+        translate([30,15,-0.01])
+            cylinder(h=5.02,d=19.5,$fn=facettes);
+        translate([15.5,15,-0.01])
+            cylinder(h=5.02,d=4.5,$fn=facettes);
+        translate([44.5,15,-0.01])
+            cylinder(h=5.02,d=4.5,$fn=facettes);
+        translate([10,40,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+        translate([30,40,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+        translate([30,60,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+    }
+}
+
+
+module support_LMH10UU_2()
+{
+    color("cyan")
+    translate([-30,-15,0])
+    difference()
+    {
+    union()
+        {
+            translate([0,30,0])
+                cube([40,20,5]);
+            translate([20,50,0])
+                cube([20,40,5]);
+            translate([10,15,0])
+                cube([30,15,5]);
+            translate([30,15,0])
+                cylinder(h=5,d=40,$fn=facettes);
+        }
+        //LMH10
+        translate([30,15,-0.01])
+            cylinder(h=5.02,d=19.5,$fn=facettes);
+        translate([15.5,15,-0.01])
+            cylinder(h=5.02,d=4.5,$fn=facettes);
+        translate([44.5,15,-0.01])
+            cylinder(h=5.02,d=4.5,$fn=facettes);
+        //Attache 2020
+        translate([10,40,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+        translate([30,40,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+        translate([30,60,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+        translate([30,80,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+    }
+}
+
+
+module LMH10UU()
+{
+    color("blue")
     difference()
     {
         union()
         {
-            translate([20,0,0])
-                cube([40,35,5]);
-            translate([0,35,0])
-                cube([80,20,5]);
+            cylinder(h=6,d=40,$fn=facettes);
+            cylinder(h=29,d=19,$fn=facettes);
         }
-        translate([10,45,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
-        translate([30,45,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
-        translate([50,45,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
-        translate([70,45,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
-        translate([40,15,-0.01])
-            cylinder(h=5.02,d=12.5,$fn=facettes);
-        translate([24,15,-0.01])
-            cylinder(h=5.02,d=4.5,$fn=facettes);
-        translate([56,15,-0.01])
-            cylinder(h=5.02,d=4.5,$fn=facettes);
+        translate([-20,12.5,-0.01])
+            cube([40,8,6.02]);
+        translate([-20,-12.5-8,-0.01])
+            cube([40,8,6.02]);
+        translate([-14.5,0,-0.01])
+             cylinder(h=6.02,d=4.5,$fn=facettes);
+        translate([-14.5,0,-0.01])
+             cylinder(h=4.41,d=8,$fn=facettes);
+        translate([14.5,-0.01])
+             cylinder(h=6.02,d=4.5,$fn=facettes);
+        translate([14.5,0,-0.01])
+             cylinder(h=4.41,d=8,$fn=facettes);
+        
     }
 }
-// support plateau
-extremite = barre_dim/2+(largeur_interne-largeur_support)/2;
-color("silver")
+
+
+
+
+module support_nut2()
 {
-//barre axe X
-    //gauche
-    translate([extremite,extremite,-90])
-        rotate([0,90,0])
-            cube([barre_dim,barre_dim,largeur_support]);
-    //droite
-    translate([extremite,extremite+largeur_support-barre_dim,-90])
-        rotate([0,90,0])
-            cube([barre_dim,barre_dim,largeur_support]);
+    color("cyan")
+    {
+        translate([-40,-15,0])
+        {
+            difference()
+            {
+                union()
+                {
+                    translate([18,18,0])
+                        cube([44,17,5]);
+                    translate([0,35,0])
+                        cube([80,20,5]);
+                    translate([40,16,0])
+                         cylinder(h=5,d=44,$fn=facettes);
+                }
+                translate([10,45,-0.01])
+                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                translate([30,45,-0.01])
+                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                translate([50,45,-0.01])
+                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                translate([70,45,-0.01])
+                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                translate([40,15,-0.01])
+                    cylinder(h=5.02,d=24.5,$fn=facettes);
+                translate([24,15,-0.01])
+                    cylinder(h=5.02,d=4.5,$fn=facettes);
+                translate([56,15,-0.01])
+                    cylinder(h=5.02,d=4.5,$fn=facettes);
+            }
+        }
+    }
 }
-color("grey")
+
+module moteur_pap()
 {
-//barre axe Y
-    //derriere
-    translate([extremite,extremite+barre_dim,-90])
-        rotate([-90,0,0])
-            cube([barre_dim,barre_dim,largeur_support-barre_dim*2]);
-    //devant
-    translate([extremite+largeur_support-barre_dim,extremite+barre_dim,-90])
-        rotate([-90,0,0])
-            cube([barre_dim,barre_dim,largeur_support-barre_dim*2]);
+    color("black")
+    translate([-21,-21,0])
+    cube([42,42,47]);
+    color("grey")
+    translate([0,0,47])
+        cylinder(h=2,d=22,$fn=facettes);
+    color("grey")
+    translate([0,0,49])
+        cylinder(h=21,d=5,$fn=facettes);
 }
