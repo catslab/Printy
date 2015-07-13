@@ -49,14 +49,6 @@ difference()
         rotate([-90,0,0])
             cylinder(h=epaisseur+0.02,d=3,$fn=facettes);
             
-    /*
-    translate([-0.01,y_fil,z_axe_serrage ])
-        rotate([0,90,0])
-            cylinder(h=rayon_tube_8*2+0.02,d=3,$fn=facettes);
-    translate([largeur+0.01,y_fil,z_axe_serrage ])
-        rotate([0,-90,0])
-            cylinder(h=rayon_tube_8*2+0.02,d=3,$fn=facettes);
-            */
     // ailettes
     for ( i = [0 : 4] )
     {
@@ -77,9 +69,9 @@ difference()
     // centrage
     translate([largeur/2,y_fil-2,38])
     cylinder(h=2.01,d=diam_pions_centrage,$fn=facettes);
-    translate([4,epaisseur-(y_fil-2),38])
+    translate([largeur/2+entraxe_fil/2,epaisseur-(y_fil-2),38])
     cylinder(h=2.01,d=diam_pions_centrage,$fn=facettes);
-    translate([largeur-4,epaisseur-(y_fil-2),38])
+    translate([largeur/2-entraxe_fil/2,epaisseur-(y_fil-2),38])
     cylinder(h=2.01,d=diam_pions_centrage,$fn=facettes);
     
     // attache
@@ -180,5 +172,3 @@ module extrusion_1()
         ]);
  }
 
-
- 

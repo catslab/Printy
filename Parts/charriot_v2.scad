@@ -25,7 +25,8 @@ difference()
     {
         union()
         {
-            cube ([taille_x,taille_y,hauteur_charriot/2]);
+            cube ([taille_x,taille_y,hauteur_charriot]);
+            /*
             translate([0,diametre_passage/2,hauteur_charriot/2])
                 cube ([taille_x,entraxe,hauteur_charriot/2]);
             translate([0,diametre_passage/2,entraxe/2+diametre_passage/2])
@@ -39,8 +40,11 @@ difference()
                     cylinder(h=taille_x,d=diametre_passage,$fn=facettes);
             translate([0,taille_x-diametre_passage/2,hauteur_charriot-diametre_passage])
                 cube ([taille_x,diametre_passage/2,diametre_passage/2]);
+            */
         }
     }
+    
+    //Ecrous d'attache
     
     for ( i = [-1 : 1] )
     {
@@ -79,6 +83,22 @@ difference()
                 ecrou_m3(10);
         translate([-taille_x/2+6,0,-hauteur_charriot/2 - 0.01])
             cylinder(h=epaisseur_ecrou_3*3,d=3.5,$fn=facettes);
+        
+        for ( i = [-1 : 1] )
+        {
+            translate([taille_x/2-6,i*entraxe_attache,hauteur_charriot/2 - 2*epaisseur_ecrou_3])
+                ecrou_m3(10);
+            translate([taille_x/2-6,i*entraxe_attache,hauteur_charriot/2 - 3*epaisseur_ecrou_3 +0.01])
+                cylinder(h=epaisseur_ecrou_3*3,d=3.5,$fn=facettes);
+        }
+        for ( i = [-1 : 1] )
+        {
+            translate([-taille_x/2+8,i*entraxe_attache,hauteur_charriot/2 - 2*epaisseur_ecrou_3])
+                rotate([0,0,180])
+                    ecrou_m3(10);
+            translate([-taille_x/2+6,i*entraxe_attache,hauteur_charriot/2 - 3*epaisseur_ecrou_3 +0.01])
+                cylinder(h=epaisseur_ecrou_3*3,d=3.5,$fn=facettes);
+        }
     }
     
     translate([-taille_x/2,20,10])
@@ -166,10 +186,3 @@ module ecrou_m3(profondeur_ecrou3)
             [-largeur_ecrou_3/2,-hauteur_ecrou_3/2*cos(60)]//5
             ]);
 } 
-
- 
- 
- color("silver")
-  rotate([0,0,90])
- translate([-20,-6,-38-24])
- import("bloc_impression.stl");

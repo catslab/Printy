@@ -26,7 +26,7 @@ longueur_sfu = 420;
 
 hauteur_plateau = 0;
 
-x_charriot = 150;
+x_charriot = 120;
 y_charriot = 150;
 
 // cadre
@@ -360,7 +360,7 @@ cylinder(h = longueur_guide,
 color("pink")
 translate([x_charriot+50+30,y_charriot+50+30,10])
 rotate([0,0,180])
-    import("charriot.stl");
+    import("charriot_v2.stl");
 color("silver")
 translate([x_charriot+50+24,y_charriot+50+50,-52])
 rotate([0,0,-90])
