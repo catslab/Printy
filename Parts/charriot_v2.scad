@@ -18,6 +18,7 @@ largeur_ecrou_3 = 5.8;
 hauteur_ecrou_3 = 6.5;
 epaisseur_ecrou_3 = 3;
 entraxe_attache = 15;
+entraxe_tubes = 18;
 
 difference()
 {
@@ -114,18 +115,18 @@ difference()
         rotate([90,90,0]) 
             extrusion_1();
  
-    translate([0,9,-hauteur_charriot/2-1])
+    translate([0,entraxe_tubes/2,-hauteur_charriot/2-1])
         cylinder(h=hauteur_charriot+2,d=diametre_entree,$fn=facettes);  
-   translate([0,-9,-hauteur_charriot/2-1])
+   translate([0,-entraxe_tubes/2,-hauteur_charriot/2-1])
         cylinder(h=hauteur_charriot+2,d=diametre_entree,$fn=facettes); 
     translate([-taille_x/2,-taille_y/2,-hauteur_charriot/2])
     {
         // centrage
         translate([taille_x/2+2,taille_y/2,-0.01])
         cylinder(h=5.01,d=diam_pions_centrage,$fn=facettes);
-        translate([taille_x/2-10,taille_y/2-4*diam_pions_centrage,-0.01])
+        translate([taille_x/2-10,taille_y/2-entraxe_tubes/2,-0.01])
         cylinder(h=5.01,d=diam_pions_centrage,$fn=facettes);
-        translate([taille_x/2-10,taille_y/2+4*diam_pions_centrage,-0.01])
+        translate([taille_x/2-10,taille_y/2+entraxe_tubes/2,-0.01])
         cylinder(h=5.01,d=diam_pions_centrage,$fn=facettes);
         // attache
         translate([taille_x/2-6,taille_y/2,-0.01])
