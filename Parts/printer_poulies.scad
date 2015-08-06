@@ -26,7 +26,7 @@ longueur_sfu = 420;
 
 hauteur_plateau = 0;
 
-x_charriot = 120;
+x_charriot = 150;
 y_charriot = 150;
 
 // cadre
@@ -366,19 +366,7 @@ translate([x_charriot+50+24,y_charriot+50+50,-52])
 rotate([0,0,-90])
 import("bloc_impression.stl");
 
-//Plateau
-color("grey")
-{
-translate([barre_dim/2+largeur_interne/2-largeur_plateau/2,barre_dim/2+largeur_interne/2-largeur_plateau/2,hauteur_plateau-75])
-cube([largeur_plateau,largeur_plateau,3]);
-/*
-translate([barre_dim/2+largeur_interne/2-largeur_plateau/2,barre_dim/2+largeur_interne/2-largeur_plateau/2,-375])
-cube([largeur_plateau,largeur_plateau,3]);
-*/
-}
 
-translate([barre_dim/2+largeur_interne/2-largeur_support/2,barre_dim/2+largeur_interne/2-largeur_support/2,hauteur_plateau-90])
-cube([largeur_support,largeur_support,16]);
 /*
 translate([barre_dim/2+largeur_interne/2-largeur_support/2,barre_dim/2+largeur_interne/2-largeur_support/2,-390])
 cube([largeur_support,largeur_support,16]);
@@ -584,6 +572,11 @@ LMH10UU();
 translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,hauteur_plateau-121])
 LMH10UU();
 
+support_plateau_2();
+
+module support_plateau_1()
+{
+
 translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-115])
     rotate([180,180,0])
         support_LMH10UU_2();
@@ -623,8 +616,97 @@ color("grey")
         rotate([-90,0,0])
             cube([barre_dim,barre_dim,largeur_support-barre_dim*2]);
 }
+//Plateau
+color("grey")
+{
+translate([barre_dim/2+largeur_interne/2-largeur_plateau/2,barre_dim/2+largeur_interne/2-largeur_plateau/2,hauteur_plateau-75])
+cube([largeur_plateau,largeur_plateau,3]);
 
+}
+// support plateau MDF 16
+translate([barre_dim/2+largeur_interne/2-largeur_support/2,barre_dim/2+largeur_interne/2-largeur_support/2,hauteur_plateau-90])
+cube([largeur_support,largeur_support,16]);
 
+}
+
+module support_plateau_2()
+{
+
+translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-115])
+    rotate([180,180,0])
+        support_LMH10UU_3();
+translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-110])
+    rotate([180,0,0])
+        support_LMH10UU_3();
+
+translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,hauteur_plateau-110])
+    rotate([0,180,0])
+        support_LMH10UU_3();
+translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,hauteur_plateau-115])
+    support_LMH10UU_3();
+
+// support plateau
+extremite = barre_dim/2+(largeur_interne-largeur_support)/2;
+color("silver")
+{
+//barre axe X
+    //gauche
+    translate([extremite,extremite,hauteur_plateau-90])
+        rotate([0,90,0])
+            cube([barre_dim,barre_dim,largeur_support]);
+    //droite
+    translate([extremite,extremite+largeur_support-barre_dim,hauteur_plateau-90])
+        rotate([0,90,0])
+            cube([barre_dim,barre_dim,largeur_support]);
+}
+color("grey")
+{
+//barre axe Y
+    //derriere
+    translate([extremite-barre_dim,extremite,hauteur_plateau-90])
+        rotate([-90,0,0])
+            cube([barre_dim,barre_dim,largeur_support]);
+    //devant
+    translate([extremite+largeur_support,extremite,hauteur_plateau-90])
+        rotate([-90,0,0])
+            cube([barre_dim,barre_dim,largeur_support]);
+}
+//Plateau
+color("grey")
+{
+translate([barre_dim/2+largeur_interne/2-largeur_plateau/2,barre_dim/2+largeur_interne/2-largeur_plateau/2,hauteur_plateau-93])
+cube([largeur_plateau,largeur_plateau,3.01]);
+
+}
+// support plateau MDF 16
+difference(){
+    translate([barre_dim/2+largeur_interne/2-largeur_support/2,barre_dim*1.5+largeur_interne/2-largeur_support/2,hauteur_plateau-106])
+    cube([largeur_support,largeur_support-40,16]);
+
+    //Devant
+    //trous 
+    translate([largeur_interne/2+largeur_support/2-2,barre_dim*1.5+12+largeur_interne/2-largeur_support/2,hauteur_plateau-106.01])
+        cylinder(h=16.02,d=5.5,$fn=facettes);
+    translate([largeur_interne/2+largeur_support/2-2,barre_dim*1.5+12+largeur_interne/2-largeur_support/2,hauteur_plateau-98])
+        cylinder(h=8.01,d=10,$fn=facettes);
+    //trous 
+    translate([largeur_interne/2+largeur_support/2-2,-barre_dim/2-12+largeur_interne/2+largeur_support/2,hauteur_plateau-106.01])
+        cylinder(h=16.02,d=5.5,$fn=facettes);
+    translate([largeur_interne/2+largeur_support/2-2,-barre_dim/2-12+largeur_interne/2+largeur_support/2,hauteur_plateau-98])
+        cylinder(h=8.01,d=10,$fn=facettes);
+    //Derriere
+    //trous 
+    translate([largeur_interne/2-largeur_support/2+barre_dim+2,barre_dim*1.5+12+largeur_interne/2-largeur_support/2,hauteur_plateau-106.01])
+        cylinder(h=16.02,d=5.5,$fn=facettes);
+    translate([largeur_interne/2-largeur_support/2+barre_dim+2,barre_dim*1.5+12+largeur_interne/2-largeur_support/2,hauteur_plateau-98])
+        cylinder(h=8.01,d=10,$fn=facettes);
+    //trous 
+    translate([largeur_interne/2-largeur_support/2+barre_dim+2,-barre_dim/2-12+largeur_interne/2+largeur_support/2,hauteur_plateau-106.01])
+        cylinder(h=16.02,d=5.5,$fn=facettes);
+    translate([largeur_interne/2-largeur_support/2+barre_dim+2,-barre_dim/2-12+largeur_interne/2+largeur_support/2,hauteur_plateau-98])
+        cylinder(h=8.01,d=10,$fn=facettes);
+    }
+}
 
 module SK10() 
 { 
@@ -815,6 +897,50 @@ module support_LMH10UU_2()
     }
 }
 
+module support_LMH10UU_3()
+{
+    color("cyan")
+    translate([-30,-15,0])
+    difference()
+    {
+    union()
+        {
+            translate([0,30,0])
+                cube([60,20,5]);
+            translate([40,50,0])
+                cube([20,40,5]);
+            translate([10,15,0])
+                cube([30,15,5]);
+             translate([20,15,0])
+                cube([30,15,5]);
+            translate([30,15,0])
+                cylinder(h=5,d=40,$fn=facettes);
+            translate([20,50,0])
+                cube([25,25,5]);
+        }
+        //LMH10
+        translate([30,15,-0.01])
+            cylinder(h=5.02,d=19.5,$fn=facettes);
+        translate([15.5,15,-0.01])
+            cylinder(h=5.02,d=4.5,$fn=facettes);
+        translate([44.5,15,-0.01])
+            cylinder(h=5.02,d=4.5,$fn=facettes);
+        //Attache 2020
+        translate([10,40,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+        translate([30,40,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+        translate([50,40,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+        translate([50,60,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+        translate([50,80,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+        
+        translate([28,62,-0.01])
+            cylinder(h=5.02,d=5.5,$fn=facettes);
+    }
+}
 
 module LMH10UU()
 {
