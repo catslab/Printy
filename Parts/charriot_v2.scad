@@ -26,7 +26,8 @@ difference()
     {
         union()
         {
-            cube ([taille_x,taille_y,hauteur_charriot]);
+            cube ([taille_x,taille_y,hauteur_charriot
+            ]);
             /*
             translate([0,diametre_passage/2,hauteur_charriot/2])
                 cube ([taille_x,entraxe,hauteur_charriot/2]);
@@ -65,16 +66,17 @@ difference()
     
     translate([taille_x/2-8,0,hauteur_charriot/2 - 2*epaisseur_ecrou_3])
         ecrou_m3(10);
-    translate([taille_x/2-6,0,hauteur_charriot/2 - 2*epaisseur_ecrou_3])
-        cylinder(h=epaisseur_ecrou_3*3,d=3.5,$fn=facettes);
+    translate([taille_x/2-6,0,hauteur_charriot/2 - 3 *epaisseur_ecrou_3])
+        cylinder(h=epaisseur_ecrou_3*3+0.01,d=3.5,$fn=facettes);
     translate([-taille_x/2+8,0,hauteur_charriot/2 - 2*epaisseur_ecrou_3])
         rotate([0,0,180])
             ecrou_m3(10);
-    translate([-taille_x/2+6,0,hauteur_charriot/2 - 2*epaisseur_ecrou_3])
-        cylinder(h=epaisseur_ecrou_3*3,d=3.5,$fn=facettes);
+    translate([-taille_x/2+6,0,hauteur_charriot/2 - 3*epaisseur_ecrou_3])
+        cylinder(h=epaisseur_ecrou_3*3+0.01,d=3.5,$fn=facettes);
     
     rotate([0,0,90])
     {
+        
         translate([taille_x/2-8,0,-hauteur_charriot/2 + epaisseur_ecrou_3])
             ecrou_m3(10);
         translate([taille_x/2-6,0,-hauteur_charriot/2 - 0.01])
@@ -92,6 +94,7 @@ difference()
             translate([taille_x/2-6,i*entraxe_attache,hauteur_charriot/2 - 3*epaisseur_ecrou_3 +0.01])
                 cylinder(h=epaisseur_ecrou_3*3,d=3.5,$fn=facettes);
         }
+        
         for ( i = [-1 : 1] )
         {
             translate([-taille_x/2+8,i*entraxe_attache,hauteur_charriot/2 - 2*epaisseur_ecrou_3])
