@@ -1,8 +1,9 @@
 //Partie tenant les diam_tiges
-largeur = 24;
+largeur = 22;
 epaisseur_support = 10;
-largeur_support = 30;
+largeur_support = 25;
 hauteur=40;
+entraxe=20;
 diam_tige=10;
 jeu_tige=0.1;
 trou_de_vis_3 = 3.5;
@@ -11,7 +12,7 @@ largeur_ecrou_3 = 5.8;
 hauteur_ecrou_3 = 6.5;
 epaisseur_ecrou_3 = 3;
 profondeur_trou_vis_3 = 22;
-x_cent_tige = 20;
+x_cent_tige = 15;
 z_cent_tige = 10;
 //glissière
 diam_bague = 15.9;
@@ -31,10 +32,10 @@ difference()
     {
         cylinder(h=hauteur,r=largeur/2,$fn=facettes);
     
-        translate([0,largeur/2-epaisseur_support,0])
+        translate([0,2,0])
             cube ([largeur_support, epaisseur_support, hauteur]);
-        translate([-largeur_support,largeur/2-epaisseur_support,0])
-            cube ([largeur_support, epaisseur_support, hauteur]);
+        translate([-largeur_support+5,2,0])
+            cube ([largeur_support-5, epaisseur_support, hauteur]);
         translate([0,0,hauteur/3])
         linear_extrude(height=hauteur/3)
             polygon( points=
@@ -46,17 +47,36 @@ difference()
             ]);
 
     } // union
-
     
+    // Extrusion
+    rotate_extrude($fn=facettes) 
+        polygon( points=
+        [[0,hauteur+1],//0
+        [diam_bague/2+chanfrein,hauteur+1],//1
+        [diam_bague/2+chanfrein,hauteur],//2
+        [diam_bague/2,hauteur-chanfrein],//3
+        [diam_bague/2,hauteur-prof_bague+chanfrein],//4
+        [diam_bague/2-chanfrein,hauteur-prof_bague],//5
+        [diam_tige/2+0.5+chanfrein,hauteur-prof_bague],//6
+        [diam_tige/2+0.5,hauteur-prof_bague-chanfrein],//7
+        [diam_tige/2+0.5,prof_bague+chanfrein], //8
+        [diam_tige/2+0.5+chanfrein,prof_bague],
+        [diam_bague/2-chanfrein,prof_bague],
+        [diam_bague/2,prof_bague-chanfrein], //11
+        [diam_bague/2,chanfrein],
+        [diam_bague/2+chanfrein,0],
+        [diam_bague/2+chanfrein,-1],
+        [0,-1]
+        ]);
     
     //trou no 1
-    translate([x_cent_tige,largeur/2-epaisseur_support-.01,hauteur/2])
+    translate([x_cent_tige+2.5,2-.01,hauteur/2])
         rotate([-90,0,0])
             cylinder(h=epaisseur_support+0.02,d=diam_tige+jeu_tige,$fn=facettes);
     //trou no 2
-    translate([-x_cent_tige,largeur/2-epaisseur_support-.01,hauteur/2])
+    translate([-x_cent_tige+2.5,2-.01,hauteur/2])
         rotate([-90,0,0])
-            cylinder(h=largeur/2+2,r=(diam_tige+jeu_tige)/2,$fn=facettes);
+            cylinder(h=epaisseur_support+0.02,d=diam_tige+jeu_tige,$fn=facettes);
 /*  
     // Coche no 1
     translate([largeur*1.2,largeur/2-1,hauteur - z_cent_tige])
@@ -107,26 +127,8 @@ difference()
                 */
     //Extrusion 
     //translate([largeur*1.5,largeur/2,0])
-    rotate_extrude($fn=facettes) 
-        polygon( points=
-        [[0,hauteur+1],//0
-        [diam_bague/2+chanfrein,hauteur+1],//1
-        [diam_bague/2+chanfrein,hauteur],//2
-        [diam_bague/2,hauteur-chanfrein],//3
-        [diam_bague/2,hauteur-prof_bague+chanfrein],//4
-        [diam_bague/2-chanfrein,hauteur-prof_bague],//5
-        [diam_tige/2+0.5+chanfrein,hauteur-prof_bague],//6
-        [diam_tige/2+0.5,hauteur-prof_bague-chanfrein],//7
-        [diam_tige/2+0.5,prof_bague+chanfrein], //8
-        [diam_tige/2+0.5+chanfrein,prof_bague],
-        [diam_bague/2-chanfrein,prof_bague],
-        [diam_bague/2,prof_bague-chanfrein], //11
-        [diam_bague/2,chanfrein],
-        [diam_bague/2+chanfrein,0],
-        [diam_bague/2+chanfrein,-1],
-        [0,-1]
-        ]);
-        /*
+    
+       
  // vis de serrage courroie 1
     translate([19,-4.5,-1])
         cylinder(h=hauteur+2,d=trou_de_vis_3,$fn=facettes);
@@ -173,8 +175,8 @@ difference()
                 ]);
         }
     }  
-
-    translate([15,-4.5,hauteur/3+3])
+// Ecrous bas
+    translate([15,-4.5,hauteur/3+2.5])
      {
 
         translate([0,-largeur_ecrou_3/2,0])
@@ -190,7 +192,7 @@ difference()
             [-largeur_ecrou_3/2,-hauteur_ecrou_3/2*cos(60)]//5
             ]);
     } 
-    translate([15,-4.5,2*hauteur/3-epaisseur_ecrou_3-3])
+    translate([15,-4.5,2*hauteur/3-epaisseur_ecrou_3-2.5])
     { 
         translate([0,-largeur_ecrou_3/2,0])
             cube([hauteur_ecrou_3+10,largeur_ecrou_3 ,epaisseur_ecrou_3]);
@@ -204,11 +206,10 @@ difference()
             [-largeur_ecrou_3/2,hauteur_ecrou_3/2*cos(60)],//4
             [-largeur_ecrou_3/2,-hauteur_ecrou_3/2*cos(60)]//5
             ]);
-    }
-*/
-    
+    }    
 } // fin piece
-/*
+
+// Attaches courroie
 translate([10,-25.5,hauteur/3-8])
 difference()
 {
@@ -307,4 +308,3 @@ difference()
     translate([-10,25.5,-0.01])
     cylinder(h=6.02,d=25,$fn=facettes);
 }
-*/
