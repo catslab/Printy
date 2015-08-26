@@ -298,16 +298,16 @@ rotate([90,0,0])
 //Supports de translation
 translate([x_charriot+50,28,20])
 rotate([0,90,0])
-import("piece_1v5.stl");
+import("glissieres/glissiere_v5.stl");
 translate([28,y_charriot+50,0])
 rotate([270,-90,0])
-import("piece_1v5.stl");
+import("glissieres/glissiere_v5.stl");
 translate([440+20-28,largeur_charriot+y_charriot+50,0])
 rotate([90,270,0])
-import("piece_1v5.stl");
+import("glissieres/glissiere_v5.stl");
 translate([largeur_charriot+x_charriot+50,440+20-28,20])
 rotate([00,90,180])
-import("piece_1v5.stl");
+import("glissieres/glissiere_v5.stl");
 
 color("black")
 {
