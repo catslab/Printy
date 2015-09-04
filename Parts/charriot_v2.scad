@@ -12,7 +12,7 @@ facettes = 50;
 
 diametre_entree = 8.5;
 
-diam_pions_centrage = 4;
+diam_pions_centrage = 4+0.25;
 
 largeur_ecrou_3 = 5.8;
 hauteur_ecrou_3 = 6.5;
@@ -26,8 +26,7 @@ difference()
     {
         union()
         {
-            cube ([taille_x,taille_y,hauteur_charriot
-            ]);
+            cube ([taille_x,taille_y,hauteur_charriot]);
             /*
             translate([0,diametre_passage/2,hauteur_charriot/2])
                 cube ([taille_x,entraxe,hauteur_charriot/2]);
@@ -50,60 +49,30 @@ difference()
     
     for ( i = [-1 : 1] )
     {
-        translate([taille_x/2-6,i*entraxe_attache,-hauteur_charriot/2 + epaisseur_ecrou_3])
-            ecrou_m3(10);
-        translate([taille_x/2-6,i*entraxe_attache,-hauteur_charriot/2 - 0.01])
-            cylinder(h=epaisseur_ecrou_3*3,d=3.5,$fn=facettes);
+        attache_m3(taille_x/2-5,i*entraxe_attache,-hauteur_charriot/2,0,0,0);
     }
     for ( i = [-1 : 1] )
     {
-        translate([-taille_x/2+8,i*entraxe_attache,-hauteur_charriot/2 + epaisseur_ecrou_3])
-            rotate([0,0,180])
-                ecrou_m3(10);
-        translate([-taille_x/2+6,i*entraxe_attache,-hauteur_charriot/2 - 0.01])
-            cylinder(h=epaisseur_ecrou_3*3,d=3.5,$fn=facettes);
+        attache_m3(-taille_x/2+5,i*entraxe_attache,-hauteur_charriot/2,0,0,180);        
     }
     
-    translate([taille_x/2-8,0,hauteur_charriot/2 - 2*epaisseur_ecrou_3])
-        ecrou_m3(10);
-    translate([taille_x/2-6,0,hauteur_charriot/2 - 3 *epaisseur_ecrou_3])
-        cylinder(h=epaisseur_ecrou_3*3+0.01,d=3.5,$fn=facettes);
-    translate([-taille_x/2+8,0,hauteur_charriot/2 - 2*epaisseur_ecrou_3])
-        rotate([0,0,180])
-            ecrou_m3(10);
-    translate([-taille_x/2+6,0,hauteur_charriot/2 - 3*epaisseur_ecrou_3])
-        cylinder(h=epaisseur_ecrou_3*3+0.01,d=3.5,$fn=facettes);
+    attache_m3(taille_x/2-5,0,hauteur_charriot/2 - 3*epaisseur_ecrou_3,0,0,0);
+    attache_m3(-taille_x/2+5,0,hauteur_charriot/2 - 3*epaisseur_ecrou_3,0,0,180);
+       
     
-    rotate([0,0,90])
-    {
-        
-        translate([taille_x/2-8,0,-hauteur_charriot/2 + epaisseur_ecrou_3])
-            ecrou_m3(10);
-        translate([taille_x/2-6,0,-hauteur_charriot/2 - 0.01])
-            cylinder(h=epaisseur_ecrou_3*3,d=3.5,$fn=facettes);
-        translate([-taille_x/2+8,0,-hauteur_charriot/2 + epaisseur_ecrou_3])
-            rotate([0,0,180])
-                ecrou_m3(10);
-        translate([-taille_x/2+6,0,-hauteur_charriot/2 - 0.01])
-            cylinder(h=epaisseur_ecrou_3*3,d=3.5,$fn=facettes);
-        
-        for ( i = [-1 : 1] )
+    for ( i = [-1 : 1] )
         {
-            translate([taille_x/2-6,i*entraxe_attache,hauteur_charriot/2 - 2*epaisseur_ecrou_3])
-                ecrou_m3(10);
-            translate([taille_x/2-6,i*entraxe_attache,hauteur_charriot/2 - 3*epaisseur_ecrou_3 +0.01])
-                cylinder(h=epaisseur_ecrou_3*3,d=3.5,$fn=facettes);
+            attache_m3(i*entraxe_attache,taille_y/2-5,hauteur_charriot/2 - 3*epaisseur_ecrou_3,0,0,90);
         }
-        
-        for ( i = [-1 : 1] )
+     for ( i = [-1 : 1] )
         {
-            translate([-taille_x/2+8,i*entraxe_attache,hauteur_charriot/2 - 2*epaisseur_ecrou_3])
-                rotate([0,0,180])
-                    ecrou_m3(10);
-            translate([-taille_x/2+6,i*entraxe_attache,hauteur_charriot/2 - 3*epaisseur_ecrou_3 +0.01])
-                cylinder(h=epaisseur_ecrou_3*3,d=3.5,$fn=facettes);
+            attache_m3(i*entraxe_attache,-taille_y/2+5,hauteur_charriot/2 - 3*epaisseur_ecrou_3,0,0,-90);
         }
-    }
+    
+       
+    attache_m3(0,taille_y/2-5,-hauteur_charriot/2,0,0,90);
+    attache_m3(0,-taille_y/2+5,-hauteur_charriot/2,0,0,-90);
+
     
     translate([-taille_x/2,20,10])
         rotate([0,90,0]) 
@@ -190,3 +159,20 @@ module ecrou_m3(profondeur_ecrou3)
             [-largeur_ecrou_3/2,-hauteur_ecrou_3/2*cos(60)]//5
             ]);
 } 
+
+module attache_m3(x,y,z,rx=0,ry=0,rz=0)
+{
+    translate([x,y,z ])
+    {
+    
+        rotate([rx,ry,rz])
+        translate([-2,0,epaisseur_ecrou_3])
+            ecrou_m3(10);
+    
+        translate([0,0, -0.01])
+            cylinder(h=epaisseur_ecrou_3*2,d=3.5,$fn=facettes);
+        translate([0,0,2*epaisseur_ecrou_3 +0.2])
+            cylinder(h=epaisseur_ecrou_3,d=3.5,$fn=facettes);
+    }
+}
+
