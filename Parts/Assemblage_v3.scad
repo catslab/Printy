@@ -26,8 +26,8 @@ longueur_sfu = 420;
 
 hauteur_plateau = -150;
 
-x_charriot = 00;
-y_charriot = -6;
+x_charriot = 10;
+y_charriot = 150;
 
 
 use<charriot_v5.scad>;
@@ -368,11 +368,12 @@ rotate([0,0,180])
 charriot_v5();
 
 translate([x_charriot+48+32-9,y_charriot+48+32-9,-23.5-44])
-rotate([0,0,-90])
+rotate([0,0,180])
 hexagon_hotend();
 translate([x_charriot+48+32+9,y_charriot+48+32+9,-23.5-44])
-rotate([0,0,90])
+rotate([0,0,0])
 hexagon_hotend();
+
 
 /*
 translate([barre_dim/2+largeur_interne/2-largeur_support/2,barre_dim/2+largeur_interne/2-largeur_support/2,-390])
