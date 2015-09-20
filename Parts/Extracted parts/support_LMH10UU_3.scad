@@ -1,0 +1,41 @@
+$fn = 100;
+translate([-30,-15,0])
+    difference()
+    {
+    union()
+        {
+            translate([0,30,0])
+                cube([60,20,5]);
+            translate([40,50,0])
+                cube([20,40,5]);
+            translate([10,15,0])
+                cube([30,15,5]);
+             translate([20,15,0])
+                cube([30,15,5]);
+            translate([30,15,0])
+                cylinder(h=5,d=40);
+            translate([20,50,0])
+                cube([25,25,5]);
+        }
+        //LMH10
+        translate([30,15,-0.01])
+            cylinder(h=5.02,d=19.5);
+        translate([15.5,15,-0.01])
+            cylinder(h=5.02,d=4.5);
+        translate([44.5,15,-0.01])
+            cylinder(h=5.02,d=4.5);
+        //Attache 2020
+        translate([10,40,-0.01])
+            cylinder(h=5.02,d=5.5);
+        translate([30,40,-0.01])
+            cylinder(h=5.02,d=5.5);
+        translate([50,40,-0.01])
+            cylinder(h=5.02,d=5.5);
+        translate([50,60,-0.01])
+            cylinder(h=5.02,d=5.5);
+        translate([50,80,-0.01])
+            cylinder(h=5.02,d=5.5);
+        
+        translate([28,62,-0.01])
+            cylinder(h=5.02,d=5.5);
+    }

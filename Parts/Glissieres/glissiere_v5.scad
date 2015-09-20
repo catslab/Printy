@@ -23,7 +23,9 @@ facettes=50;
 color("red")
 //translate([0,0,largeur/2])
 //rotate([0,-90,0])
+glissiere_v5();
 
+module glissiere_v5(){
 difference()
 {
     // BLoc principal
@@ -304,4 +306,5 @@ difference()
         cylinder(h=6.02,d=trou_de_vis_3,$fn=facettes);
     translate([-10,25.5,-0.01])
     cylinder(h=6.02,d=25,$fn=facettes);
+}
 }

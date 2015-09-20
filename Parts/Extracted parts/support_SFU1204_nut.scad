@@ -1,0 +1,30 @@
+$fn = 100;
+translate([-40,-15,0])
+        {
+            difference()
+            {
+                union()
+                {
+                    translate([18,18,0])
+                        cube([44,17,5]);
+                    translate([0,35,0])
+                        cube([80,20,5]);
+                    translate([40,16,0])
+                         cylinder(h=5,d=44);
+                }
+                translate([10,45,-0.01])
+                    cylinder(h=5.02,d=5.5);
+                translate([30,45,-0.01])
+                    cylinder(h=5.02,d=5.5);
+                translate([50,45,-0.01])
+                    cylinder(h=5.02,d=5.5);
+                translate([70,45,-0.01])
+                    cylinder(h=5.02,d=5.5);
+                translate([40,15,-0.01])
+                    cylinder(h=5.02,d=24.5);
+                translate([24,15,-0.01])
+                    cylinder(h=5.02,d=4.5);
+                translate([56,15,-0.01])
+                    cylinder(h=5.02,d=4.5);
+            }
+        }

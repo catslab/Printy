@@ -4,7 +4,7 @@ epaisseur_poulie = 18.5;
 epaisseur_axe = 9;
 epaisseur_flanc = 1.5;
 diametre_flanc = 25;
-facettes= 50;
+$fn = 100;
 
 barre_dim = 20;
 
@@ -203,22 +203,22 @@ color("red")
     translate([18+barre_dim/2,-30.01,0])
     rotate([-90,0,0])
     cylinder(h = largeur_interne + largeur_charriot,
-        d=axe_diam,$fn=facettes);
+        d=axe_diam);
     //Y0
     translate([-10,18+barre_dim/2,20])
     rotate([0,90,0])
     cylinder(h = largeur_interne + largeur_charriot,
-        d=axe_diam,$fn=facettes);
+        d=axe_diam);
     //Xmax
     translate([20+largeur_interne-18-barre_dim/2,-30.01,0])
     rotate([-90,0,0])
     cylinder(h = largeur_interne + largeur_charriot,
-        d=axe_diam,$fn=facettes);
+        d=axe_diam);
     //Ymax
     translate([-30.01,20+largeur_interne-18-barre_dim/2,20])
     rotate([0,90,0])
     cylinder(h = largeur_interne + largeur_charriot,
-        d=axe_diam,$fn=facettes);
+        d=axe_diam);
 }
 //poulie 32T
 // axe Y X0
@@ -341,20 +341,20 @@ color("green")
 translate([x_charriot+60,10+18+12-10,0])
 rotate([-90,0,0])
 cylinder(h = longueur_guide,
-    d=axe_diam, center=false,$fn=facettes);
+    d=axe_diam, center=false);
 translate([x_charriot+100,10+18+12-10,0])
 rotate([-90,0,0])
 cylinder(h = longueur_guide,
-    d=axe_diam, center=false,$fn=facettes);
+    d=axe_diam, center=false);
     
 translate([10+18+12-10,y_charriot+60,20])
 rotate([0,90,0])
 cylinder(h = longueur_guide,
-    d=axe_diam, center=false,$fn=facettes);
+    d=axe_diam, center=false);
 translate([10+18+12-10,y_charriot+100,20])
 rotate([0,90,0])
 cylinder(h = longueur_guide,
-    d=axe_diam, center=false,$fn=facettes);
+    d=axe_diam, center=false);
 }
 
 color("pink")
@@ -415,9 +415,9 @@ rotate([90,90,0])
 KP08();
 
 translate([milieu,barre_dim/2+15,-hauteur_cage-barre_dim*2+3])
-cylinder(h = longueur_sfu,d=12,$fn=facettes);
+cylinder(h = longueur_sfu,d=12);
 translate([milieu,barre_dim/2+largeur_interne-15,-hauteur_cage-barre_dim*2+3])
-cylinder(h = longueur_sfu,d=12,$fn=facettes);
+cylinder(h = longueur_sfu,d=12);
 
 translate([milieu,barre_dim/2+15,hauteur_plateau-125])
     rotate([0,0,0])
@@ -426,10 +426,10 @@ translate([milieu,barre_dim/2+largeur_interne-15,hauteur_plateau-125])
     rotate([0,0,0])
         SFU1204_nut();
 translate([milieu,barre_dim/2+15,hauteur_plateau-115])
-    support_nut2();
+    support_SFU1204_nut();
 translate([milieu,barre_dim/2+largeur_interne-15,hauteur_plateau-115])
     rotate([0,0,180])
-        support_nut2();
+        support_SFU1204_nut();
 
 epaisseur_KP08 = 13;
 decalage_KP08 = 2;
@@ -505,13 +505,13 @@ SK10();
 color("green")
 {
 translate([largeur_interne-barre_dim/2,barre_dim/2+largeur_interne/2+largeur_support/2,-400-barre_dim/2-7])
-cylinder(h = 400,d=10,$fn=facettes);
+cylinder(h = 400,d=10);
 translate([largeur_interne-barre_dim/2,barre_dim/2+largeur_interne/2-largeur_support/2,-400-barre_dim/2-7])
-cylinder(h = 400,d=10,$fn=facettes);
+cylinder(h = 400,d=10);
 translate([barre_dim*1.5,barre_dim/2+largeur_interne/2-largeur_support/2,-400-barre_dim/2-7])
-cylinder(h = 400,d=10,$fn=facettes);
+cylinder(h = 400,d=10);
 translate([barre_dim*1.5,barre_dim/2+largeur_interne/2+largeur_support/2,-400-barre_dim/2-7])
-cylinder(h = 400,d=10,$fn=facettes);
+cylinder(h = 400,d=10);
 }
 
 */
@@ -553,13 +553,13 @@ ep_sk10 = 14;
 color("green")
 {
 translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,-hauteur_cage-barre_dim/2-ep_sk10/2])
-cylinder(h = long_glissiere_plateau,d=10,$fn=facettes);
+cylinder(h = long_glissiere_plateau,d=10);
 translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,-hauteur_cage-barre_dim/2-ep_sk10/2])
-cylinder(h = long_glissiere_plateau,d=10,$fn=facettes);
+cylinder(h = long_glissiere_plateau,d=10);
 translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,-hauteur_cage-barre_dim/2-ep_sk10/2])
-cylinder(h = long_glissiere_plateau,d=10,$fn=facettes);
+cylinder(h = long_glissiere_plateau,d=10);
 translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,-hauteur_cage-barre_dim/2-ep_sk10/2])
-cylinder(h = long_glissiere_plateau,d=10,$fn=facettes);
+cylinder(h = long_glissiere_plateau,d=10);
 }
 
 // glissieres sur les axes
@@ -686,25 +686,25 @@ difference(){
     //Devant
     //trous 
     translate([largeur_interne/2+largeur_support/2-2,barre_dim*1.5+12+largeur_interne/2-largeur_support/2,hauteur_plateau-106.01])
-        cylinder(h=16.02,d=5.5,$fn=facettes);
+        cylinder(h=16.02,d=5.5);
     translate([largeur_interne/2+largeur_support/2-2,barre_dim*1.5+12+largeur_interne/2-largeur_support/2,hauteur_plateau-98])
-        cylinder(h=8.01,d=10,$fn=facettes);
+        cylinder(h=8.01,d=10);
     //trous 
     translate([largeur_interne/2+largeur_support/2-2,-barre_dim/2-12+largeur_interne/2+largeur_support/2,hauteur_plateau-106.01])
-        cylinder(h=16.02,d=5.5,$fn=facettes);
+        cylinder(h=16.02,d=5.5);
     translate([largeur_interne/2+largeur_support/2-2,-barre_dim/2-12+largeur_interne/2+largeur_support/2,hauteur_plateau-98])
-        cylinder(h=8.01,d=10,$fn=facettes);
+        cylinder(h=8.01,d=10);
     //Derriere
     //trous 
     translate([largeur_interne/2-largeur_support/2+barre_dim+2,barre_dim*1.5+12+largeur_interne/2-largeur_support/2,hauteur_plateau-106.01])
-        cylinder(h=16.02,d=5.5,$fn=facettes);
+        cylinder(h=16.02,d=5.5);
     translate([largeur_interne/2-largeur_support/2+barre_dim+2,barre_dim*1.5+12+largeur_interne/2-largeur_support/2,hauteur_plateau-98])
-        cylinder(h=8.01,d=10,$fn=facettes);
+        cylinder(h=8.01,d=10);
     //trous 
     translate([largeur_interne/2-largeur_support/2+barre_dim+2,-barre_dim/2-12+largeur_interne/2+largeur_support/2,hauteur_plateau-106.01])
-        cylinder(h=16.02,d=5.5,$fn=facettes);
+        cylinder(h=16.02,d=5.5);
     translate([largeur_interne/2-largeur_support/2+barre_dim+2,-barre_dim/2-12+largeur_interne/2+largeur_support/2,hauteur_plateau-98])
-        cylinder(h=8.01,d=10,$fn=facettes);
+        cylinder(h=8.01,d=10);
     }
 }
 
@@ -724,7 +724,7 @@ module SK10()
                 }
                 translate([-0.01,21,20])
                     rotate([0,90,0])
-                        cylinder(h = 18.02,d=10,$fn=facettes);
+                        cylinder(h = 18.02,d=10);
             }
         }
     }
@@ -738,7 +738,7 @@ module SK10()
         {
             translate([0,27.5,15])
                 rotate([0,90,0])
-                    cylinder(h = 13,d=27,$fn=facettes);
+                    cylinder(h = 13,d=27);
             cube([13,55,5]);
             translate([0,14,0])
                 cube([13,27,15]);
@@ -749,13 +749,13 @@ module SK10()
 module poulie_32()
 {
     translate([0,0,(epaisseur_poulie - epaisseur_axe)/2])
-        cylinder(h = epaisseur_poulie - epaisseur_axe,d=diametre_poulie, center=true,$fn=facettes);
+        cylinder(h = epaisseur_poulie - epaisseur_axe,d=diametre_poulie, center=true);
     translate([0,0,epaisseur_axe+(epaisseur_poulie -    epaisseur_axe)/2])
-        cylinder(h = epaisseur_axe,d=diametre_axe, center=true,$fn=facettes);
+        cylinder(h = epaisseur_axe,d=diametre_axe, center=true);
     translate([0,0,epaisseur_flanc/2])
-        cylinder(h = epaisseur_flanc,d=diametre_flanc, center=true,$fn=facettes);
+        cylinder(h = epaisseur_flanc,d=diametre_flanc, center=true);
     translate([0,0,epaisseur_flanc/2+epaisseur_flanc+6.5])
-        cylinder(h = epaisseur_flanc,d=diametre_flanc, center=true,$fn=facettes);
+        cylinder(h = epaisseur_flanc,d=diametre_flanc, center=true);
 }
     
 module KP000() 
@@ -766,7 +766,7 @@ module KP000()
         {
             translate([0,33.5,18.5])
                 rotate([0,90,0])
-                    cylinder(h = 16,d=33,$fn=facettes);
+                    cylinder(h = 16,d=33);
             cube([16,67,6]);
             translate([0,17,5])
                 cube([16,33,16.5]);
@@ -784,20 +784,20 @@ module SFU1204_nut()
         {
             union()
             {
-                cylinder(h=10,d=40,$fn=facettes);
+                cylinder(h=10,d=40);
                 translate([0,0,10])
-                    cylinder(h=30,d=24,$fn=facettes);
+                    cylinder(h=30,d=24);
             }
             translate([0,0,-0.01])
-                cylinder(h=40.02,d=12,$fn=facettes);
+                cylinder(h=40.02,d=12);
              translate([-20,15,-0.01])
                 cube([40,5,10.02]);
             translate([-20,-20,-0.01])
                 cube([40,5,10.02]);
             translate([-16,0,-0.01])
-                 cylinder(h=10.02,d=4.5,$fn=facettes);
+                 cylinder(h=10.02,d=4.5);
             translate([16,0,-0.01])
-                 cylinder(h=10.02,d=4.5,$fn=facettes);
+                 cylinder(h=10.02,d=4.5);
         }
     }
 }
@@ -818,19 +818,19 @@ module support_nut()
                         cube([80,20,5]);
                 }
                 translate([10,45,-0.01])
-                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                    cylinder(h=5.02,d=5.5);
                 translate([30,45,-0.01])
-                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                    cylinder(h=5.02,d=5.5);
                 translate([50,45,-0.01])
-                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                    cylinder(h=5.02,d=5.5);
                 translate([70,45,-0.01])
-                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                    cylinder(h=5.02,d=5.5);
                 translate([40,15,-0.01])
-                    cylinder(h=5.02,d=24.5,$fn=facettes);
+                    cylinder(h=5.02,d=24.5);
                 translate([24,15,-0.01])
-                    cylinder(h=5.02,d=4.5,$fn=facettes);
+                    cylinder(h=5.02,d=4.5);
                 translate([56,15,-0.01])
-                    cylinder(h=5.02,d=4.5,$fn=facettes);
+                    cylinder(h=5.02,d=4.5);
             }
         }
     }
@@ -846,17 +846,17 @@ module support_LMH10UU()
 
             cube([50,70,5]);
         translate([30,15,-0.01])
-            cylinder(h=5.02,d=19.5,$fn=facettes);
+            cylinder(h=5.02,d=19.5);
         translate([15.5,15,-0.01])
-            cylinder(h=5.02,d=4.5,$fn=facettes);
+            cylinder(h=5.02,d=4.5);
         translate([44.5,15,-0.01])
-            cylinder(h=5.02,d=4.5,$fn=facettes);
+            cylinder(h=5.02,d=4.5);
         translate([10,40,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
         translate([30,40,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
         translate([30,60,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
     }
 }
 
@@ -876,24 +876,24 @@ module support_LMH10UU_2()
             translate([10,15,0])
                 cube([30,15,5]);
             translate([30,15,0])
-                cylinder(h=5,d=40,$fn=facettes);
+                cylinder(h=5,d=40);
         }
         //LMH10
         translate([30,15,-0.01])
-            cylinder(h=5.02,d=19.5,$fn=facettes);
+            cylinder(h=5.02,d=19.5);
         translate([15.5,15,-0.01])
-            cylinder(h=5.02,d=4.5,$fn=facettes);
+            cylinder(h=5.02,d=4.5);
         translate([44.5,15,-0.01])
-            cylinder(h=5.02,d=4.5,$fn=facettes);
+            cylinder(h=5.02,d=4.5);
         //Attache 2020
         translate([10,40,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
         translate([30,40,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
         translate([30,60,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
         translate([30,80,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
     }
 }
 
@@ -914,31 +914,31 @@ module support_LMH10UU_3()
              translate([20,15,0])
                 cube([30,15,5]);
             translate([30,15,0])
-                cylinder(h=5,d=40,$fn=facettes);
+                cylinder(h=5,d=40);
             translate([20,50,0])
                 cube([25,25,5]);
         }
         //LMH10
         translate([30,15,-0.01])
-            cylinder(h=5.02,d=19.5,$fn=facettes);
+            cylinder(h=5.02,d=19.5);
         translate([15.5,15,-0.01])
-            cylinder(h=5.02,d=4.5,$fn=facettes);
+            cylinder(h=5.02,d=4.5);
         translate([44.5,15,-0.01])
-            cylinder(h=5.02,d=4.5,$fn=facettes);
+            cylinder(h=5.02,d=4.5);
         //Attache 2020
         translate([10,40,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
         translate([30,40,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
         translate([50,40,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
         translate([50,60,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
         translate([50,80,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
         
         translate([28,62,-0.01])
-            cylinder(h=5.02,d=5.5,$fn=facettes);
+            cylinder(h=5.02,d=5.5);
     }
 }
 
@@ -949,21 +949,21 @@ module LMH10UU()
     {
         union()
         {
-            cylinder(h=6,d=40,$fn=facettes);
-            cylinder(h=29,d=19,$fn=facettes);
+            cylinder(h=6,d=40);
+            cylinder(h=29,d=19);
         }
         translate([-20,12.5,-0.01])
             cube([40,8,6.02]);
         translate([-20,-12.5-8,-0.01])
             cube([40,8,6.02]);
         translate([-14.5,0,-0.01])
-             cylinder(h=6.02,d=4.5,$fn=facettes);
+             cylinder(h=6.02,d=4.5);
         translate([-14.5,0,-0.01])
-             cylinder(h=4.41,d=8,$fn=facettes);
+             cylinder(h=4.41,d=8);
         translate([14.5,-0.01])
-             cylinder(h=6.02,d=4.5,$fn=facettes);
+             cylinder(h=6.02,d=4.5);
         translate([14.5,0,-0.01])
-             cylinder(h=4.41,d=8,$fn=facettes);
+             cylinder(h=4.41,d=8);
         
     }
 }
@@ -971,7 +971,7 @@ module LMH10UU()
 
 
 
-module support_nut2()
+module support_SFU1204_nut()
 {
     color("cyan")
     {
@@ -986,22 +986,22 @@ module support_nut2()
                     translate([0,35,0])
                         cube([80,20,5]);
                     translate([40,16,0])
-                         cylinder(h=5,d=44,$fn=facettes);
+                         cylinder(h=5,d=44);
                 }
                 translate([10,45,-0.01])
-                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                    cylinder(h=5.02,d=5.5);
                 translate([30,45,-0.01])
-                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                    cylinder(h=5.02,d=5.5);
                 translate([50,45,-0.01])
-                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                    cylinder(h=5.02,d=5.5);
                 translate([70,45,-0.01])
-                    cylinder(h=5.02,d=5.5,$fn=facettes);
+                    cylinder(h=5.02,d=5.5);
                 translate([40,15,-0.01])
-                    cylinder(h=5.02,d=24.5,$fn=facettes);
+                    cylinder(h=5.02,d=24.5);
                 translate([24,15,-0.01])
-                    cylinder(h=5.02,d=4.5,$fn=facettes);
+                    cylinder(h=5.02,d=4.5);
                 translate([56,15,-0.01])
-                    cylinder(h=5.02,d=4.5,$fn=facettes);
+                    cylinder(h=5.02,d=4.5);
             }
         }
     }
@@ -1014,10 +1014,10 @@ module moteur_pap()
     cube([42,42,47]);
     color("grey")
     translate([0,0,47])
-        cylinder(h=2,d=22,$fn=facettes);
+        cylinder(h=2,d=22);
     color("grey")
     translate([0,0,49])
-        cylinder(h=21,d=5,$fn=facettes);
+        cylinder(h=21,d=5);
 }
  
 module equerre_50()
@@ -1035,15 +1035,15 @@ module equerre_50()
                 [0,60]
             ]);
             translate([10,10,-0.01])
-                cylinder(h=5.02,d=5.5,$fn=facettes);
+                cylinder(h=5.02,d=5.5);
             translate([30,10,-0.01])
-                cylinder(h=5.02,d=5.5,$fn=facettes);
+                cylinder(h=5.02,d=5.5);
             translate([10,30,-0.01])
-                cylinder(h=5.02,d=5.5,$fn=facettes);
+                cylinder(h=5.02,d=5.5);
             translate([50,10,-0.01])
-                cylinder(h=5.02,d=5.5,$fn=facettes);
+                cylinder(h=5.02,d=5.5);
             translate([10,50,-0.01])
-                cylinder(h=5.02,d=5.5,$fn=facettes);
+                cylinder(h=5.02,d=5.5);
         }
     }
 }
@@ -1067,15 +1067,15 @@ module tee_50()
                 [60,0],
             ]);
             translate([10,10,-0.01])
-                cylinder(h=5.02,d=5.5,$fn=facettes);
+                cylinder(h=5.02,d=5.5);
             translate([30,10,-0.01])
-                cylinder(h=5.02,d=5.5,$fn=facettes);
+                cylinder(h=5.02,d=5.5);
             translate([50,10,-0.01])
-                cylinder(h=5.02,d=5.5,$fn=facettes);
+                cylinder(h=5.02,d=5.5);
             translate([30,30,-0.01])
-                cylinder(h=5.02,d=5.5,$fn=facettes);
+                cylinder(h=5.02,d=5.5);
             translate([30,50,-0.01])
-                cylinder(h=5.02,d=5.5,$fn=facettes);
+                cylinder(h=5.02,d=5.5);
         }
     }
 }
