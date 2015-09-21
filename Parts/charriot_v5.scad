@@ -21,6 +21,17 @@ entraxe_attache = 15;
 entraxe_tubes = 18;
 
 charriot_v5();
+cobra();
+module cobra(){
+color("silver")
+translate([9,9,-hauteur_charriot/2])
+rotate([90,0,0])
+import("micron3dp/cobra.stl");
+color("silver")
+translate([-9,-9,-hauteur_charriot/2])
+rotate([90,0,180])
+import("micron3dp/cobra.stl");
+}
 
 module charriot_v5(){
 difference()

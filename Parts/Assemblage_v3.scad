@@ -367,13 +367,18 @@ translate([x_charriot+50+30,y_charriot+50+30,10])
 rotate([0,0,180])
 charriot_v5();
 
+/*
 translate([x_charriot+48+32-9,y_charriot+48+32-9,-23.5-44])
 rotate([0,0,180])
 hexagon_hotend();
 translate([x_charriot+48+32+9,y_charriot+48+32+9,-23.5-44])
 rotate([0,0,0])
 hexagon_hotend();
-
+*/
+translate([x_charriot+48+32,y_charriot+48+32,10])
+rotate([0,0,180])
+//hexagon_hotend();
+cobra();
 
 /*
 translate([barre_dim/2+largeur_interne/2-largeur_support/2,barre_dim/2+largeur_interne/2-largeur_support/2,-390])
