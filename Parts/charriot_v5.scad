@@ -10,7 +10,7 @@ chanfrein = 0.5;
 diam_tige=10;
 facettes = 50;
 
-diametre_entree = 8.5;
+diametre_entree = 7.25;
 
 diam_pions_centrage = 4+0.25;
 
@@ -18,17 +18,17 @@ largeur_ecrou_3 = 5.8;
 hauteur_ecrou_3 = 6.5;
 epaisseur_ecrou_3 = 3;
 entraxe_attache = 15;
-entraxe_tubes = 18;
+entraxe_tubes = 20;
 
 charriot_v5();
-cobra();
+//cobra();
 module cobra(){
 color("silver")
-translate([9,9,-hauteur_charriot/2])
+translate([10,10,-hauteur_charriot/2])
 rotate([90,0,0])
 import("micron3dp/cobra.stl");
 color("silver")
-translate([-9,-9,-hauteur_charriot/2])
+translate([-10,-10,-hauteur_charriot/2])
 rotate([90,0,180])
 import("micron3dp/cobra.stl");
 }

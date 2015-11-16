@@ -26,7 +26,7 @@ longueur_sfu = 420;
 
 hauteur_plateau = -150;
 
-x_charriot = 10;
+x_charriot = 0;
 y_charriot = 150;
 
 
