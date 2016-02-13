@@ -85,6 +85,20 @@ module wormgear(){
     }
 }
 
+module wormgear_hole(){
+    outer = 18;
+    thickness = 12;
+    tooth_thickness = 6;
+    stepped_diameter = 12;
+    color("pink")
+        union(){
+            cylinder(d=outer,h=tooth_thickness+1);
+            translate([0,0,tooth_thickness])
+            cylinder(d=stepped_diameter,h=thickness-tooth_thickness);
+        }
+}
+
+
 module gear(){
     outer = 11;
     hole = 5;

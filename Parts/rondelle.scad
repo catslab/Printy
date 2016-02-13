@@ -1,9 +1,9 @@
 $passage = 7;
 $diam=11;
-$trouvis = 5.2;
+$trouvis = 5.4;
 $hauteurint  = 3;
 $hauteurvis = 2;
-$fn=250;
+$fn=400;
 
 difference()
 {
