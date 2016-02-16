@@ -22,22 +22,44 @@ diff_trou = largeur+largeur/2 - (x_cent_tige+diam_tige/2);
 $fn=200;
 
 glissiere_v8();
+//attache();
+/*
+translate([34.25,-18,8])
+cube([2.75,18,27]);
+
+translate([16,-16,8])
+cube([2.75,16,27]);
+*/
+
+module empreinte_M4(){
+    cote_k = 7;
+    facteur =1.1547;
+    cote_e = cote_k*facteur;
+    clear = 0.25;
+    linear_extrude(height = 10, center = true)
+    circle(d = cote_e+clear, $fn=6, center=true);
+}
+
+module attache(){
+color("green")
+difference(){
+    translate([-10+29,-18,30])
+    cube([15,17.5,12]);
+
+    translate([30-1+0.63,-10.5-6,30])
+    rotate([0,-90,0])
+    courroie();
+    translate([30-1+0.63,-10.5-6-6.5,30])
+    rotate([0,-90,0])
+    courroie();
+    
+   color("black")
+    translate([23,-10.25-3,3])
+            cylinder(h=40,d=4.5);
+}
+}
 
 module glissiere_v8(){
-    
-translate([30-1,-10.5-6,-30])
-    cube([1,6,50]);
-    translate([30-1,-10.5-6,30])
-    cube([1,6,50]);
-
-color("green")
-    translate([-10+29,-14-9,8])
-    cube([10,23,12]);
-    
-    color("green")
-    translate([-10+29,-14-9,30])
-    cube([10,23,12]);
-
 
 color("red")
 difference()
@@ -62,8 +84,37 @@ difference()
             [0,-12],//4
             ]);
 */
-
+translate([0,0,8])
+linear_extrude(height=12)
+            polygon( points=
+            [[0,0],//0
+            [35,0],//1
+            [35,-18],//2
+            [19,-18],//3
+            [12,-8],//4
+            //[12,0],//4
+            ]);
     } // union
+    
+    // tension
+    
+    color("black")
+    translate([23,-10.25-3,3])
+            cylinder(h=40,d=4.5);
+    // ecrou
+    translate([23,-10.25-3,6])
+    rotate([0,0,90])
+    empreinte_M4();
+    
+// courroie bas
+
+ translate([30-1+0.63,-10.5-6,8])
+    rotate([0,-90,0])
+    courroie();
+    translate([30-1+0.63,-10.5-6-6.5,8])
+    rotate([0,-90,0])
+    courroie();
+
 translate([2,0,5])
 {    
 translate([20,7,15])
@@ -88,63 +139,7 @@ translate([20,7,15])
     translate([20,7,30-0.01])
             cylinder(h=30,d=8.5);
         }
-   /* 
-    //trou no 1
-    translate([x_cent_tige,.5,hauteur-z_cent_tige])
-        rotate([-90,0,0])
-            cylinder(h=largeur/2+2,r=(diam_tige+jeu_tige)/2);
-    //trou no 2
-    translate([x_cent_tige,.5,z_cent_tige])
-        rotate([-90,0,0])
-            cylinder(h=largeur/2+2,r=(diam_tige+jeu_tige)/2);
-  
-    // Coche no 1
-    translate([largeur*1.2,largeur/2-1,hauteur - z_cent_tige])
-        cube([x_cent_tige,largeur,2],center=true);
-    // Coche no 2
-    translate([largeur*1.2,largeur/2,z_cent_tige])
-        cube([x_cent_tige,largeur,2],center=true);
-     
-    //trou Vis de serrage 1
-    translate([largeur+largeur/2-diff_trou/2+x_axe_vis,largeur/4+0.5,-0.5])
-        cylinder(h=21,d=trou_de_vis_3);
-        
-    // passage ecrou 3mm
-    translate([x_axe_vis+largeur+largeur/2-hauteur_ecrou_3+0.5,largeur/4+0.5-largeur_ecrou_3/2,diam_tige*1.52])
-        cube([hauteur_ecrou_3+1,largeur_ecrou_3 ,epaisseur_ecrou_3]);
-    translate([x_axe_vis+largeur+largeur/2-diff_trou/2-0.5,largeur/4+0.5,diam_tige*1.52])
-        rotate([0,0,90])
-            linear_extrude(height=epaisseur_ecrou_3)
-                polygon( points=
-                [[0,-hauteur_ecrou_3/2],//0
-                [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(-30)],//1
-                [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(30)],//2
-                [0,hauteur_ecrou_3/2],//3
-                [-largeur_ecrou_3/2,hauteur_ecrou_3/2*cos(60)],//4
-                [-largeur_ecrou_3/2,-hauteur_ecrou_3/2*cos(60)]//5
-                ]);
-
-    //trou Vis de serrage 2
-    translate([x_axe_vis+largeur+largeur/2-diff_trou/2,largeur/4+0.5,hauteur+0.5])
-        rotate([0,180,0])
-            cylinder(h=21,d=trou_de_vis_3);
-
-    // Passage ecrou 2
-    translate([x_axe_vis+largeur+largeur/2-hauteur_ecrou_3+0.5,largeur/4+0.5+largeur_ecrou_3/2,hauteur-diam_tige*1.52])
-        rotate([180,0,0])
-            cube([hauteur_ecrou_3+1,largeur_ecrou_3 ,epaisseur_ecrou_3]);
-    translate([largeur+largeur/2-diff_trou/2-0.5,largeur/4+0.5,hauteur-diam_tige*1.52])
-        rotate([0,180,90])
-            linear_extrude(height=epaisseur_ecrou_3)
-                polygon( points=
-                [[0,-hauteur_ecrou_3/2],//0
-                [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(-30)],//1
-                [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(30)],//2
-                [0,hauteur_ecrou_3/2],//3
-                [-largeur_ecrou_3/2,hauteur_ecrou_3/2*cos(60)],//4
-                [-largeur_ecrou_3/2,-hauteur_ecrou_3/2*cos(60)]//5
-                ]);
-*/
+   
     //Extrusion 
     //translate([largeur*1.5,largeur/2,0])
     rotate_extrude() 
@@ -165,88 +160,34 @@ translate([20,7,15])
         [diam_bague/2+chanfrein,0],
         [diam_bague/2+chanfrein,-1],
         [0,-1]
-        ]);
-        
-        /*
- // vis de serrage courroie 1
-    translate([19,-4.5,-1])
-        cylinder(h=hauteur+2,d=trou_de_vis_3);
-    // vis de serrage courroie 2   
-    translate([15,-21,-1])
-        cylinder(h=hauteur+2,d=trou_de_vis_3);
-     // Ecrous de serrage courroie
-    difference_ecrou = 9-epaisseur_ecrou_3/2;
-    // Passage ecrou 3
-     translate([15,-21,2*hauteur/3-epaisseur_ecrou_3-3])
-     {
-        rotate([0,0,-90])
-        {
-            translate([0,-largeur_ecrou_3/2,0])
-                cube([hauteur_ecrou_3+10,largeur_ecrou_3 ,epaisseur_ecrou_3]);
-            rotate([0,0,90])
-                linear_extrude(height=epaisseur_ecrou_3)
-                polygon( points=
-                [[0,-hauteur_ecrou_3/2],//0
-                [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(-30)],//1
-                [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(30)],//2
-                [0,hauteur_ecrou_3/2],//3
-                [-largeur_ecrou_3/2,hauteur_ecrou_3/2*cos(60)],//4
-                [-largeur_ecrou_3/2,-hauteur_ecrou_3/2*cos(60)]//5
-                ]);
-        }
-    }  
-
-    translate([15,-21,hauteur/3+3])
-     {
-        rotate([0,0,-90])
-        {
-            translate([0,-largeur_ecrou_3/2,0])
-                cube([hauteur_ecrou_3+10,largeur_ecrou_3 ,epaisseur_ecrou_3]);
-            rotate([0,0,90])
-                linear_extrude(height=epaisseur_ecrou_3)
-                polygon( points=
-                [[0,-hauteur_ecrou_3/2],//0
-                [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(-30)],//1
-                [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(30)],//2
-                [0,hauteur_ecrou_3/2],//3
-                [-largeur_ecrou_3/2,hauteur_ecrou_3/2*cos(60)],//4
-                [-largeur_ecrou_3/2,-hauteur_ecrou_3/2*cos(60)]//5
-                ]);
-        }
-    }  
-
-    translate([15,-4.5,hauteur/3+3])
-     {
-
-        translate([0,-largeur_ecrou_3/2,0])
-            cube([hauteur_ecrou_3+10,largeur_ecrou_3 ,epaisseur_ecrou_3]);
-        rotate([0,0,90])
-            linear_extrude(height=epaisseur_ecrou_3)
-            polygon( points=
-            [[0,-hauteur_ecrou_3/2],//0
-            [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(-30)],//1
-            [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(30)],//2
-            [0,hauteur_ecrou_3/2],//3
-            [-largeur_ecrou_3/2,hauteur_ecrou_3/2*cos(60)],//4
-            [-largeur_ecrou_3/2,-hauteur_ecrou_3/2*cos(60)]//5
-            ]);
-    } 
-    translate([15,-4.5,2*hauteur/3-epaisseur_ecrou_3-3])
-    { 
-        translate([0,-largeur_ecrou_3/2,0])
-            cube([hauteur_ecrou_3+10,largeur_ecrou_3 ,epaisseur_ecrou_3]);
-        rotate([0,0,90])
-            linear_extrude(height=epaisseur_ecrou_3)
-            polygon( points=
-            [[0,-hauteur_ecrou_3/2],//0
-            [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(-30)],//1
-            [largeur_ecrou_3/2,hauteur_ecrou_3/2*sin(30)],//2
-            [0,hauteur_ecrou_3/2],//3
-            [-largeur_ecrou_3/2,hauteur_ecrou_3/2*cos(60)],//4
-            [-largeur_ecrou_3/2,-hauteur_ecrou_3/2*cos(60)]//5
-            ]);
-    }
-*/
-    
+        ]);    
 } // fin piece
+
+}
+module courroie(){
+    //courroie 1
+    color("blue")
+    translate([-0.01,0,0.01])
+        cube([20,6.51 ,0.64]);
+color("blue")
+    translate([0.01,0,0.01])
+    {
+        rotate([0,0,0])
+        {
+            r=0.75;
+            h=6.51;
+            // small number
+            e=.02;
+            for ( i = [0 : 9] )
+            {
+                translate([1+i*2,0,0.63])
+                    rotate([-90,90,0])
+                        difference()
+                        {
+                            cylinder(h,r,r);
+                            translate ([0,-(r+e),-e]) cube([2*(r+e),2*(r+e),h+2*e]);
+                        }
+            }
+        }
+    }
 }
