@@ -597,17 +597,18 @@ cylinder(h = long_glissiere_plateau,d=10);
 }
 
 // glissieres sur les axes
-translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-121])
-LMH10UU();
-translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-121])
-LMH10UU();
-translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,hauteur_plateau-121])
-LMH10UU();
-translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,hauteur_plateau-121])
-LMH10UU();
+translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-119])
+LMH10UU_2();
+translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-119])
+LMH10UU_2();
+translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,hauteur_plateau-119])
+LMH10UU_2();
+translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,hauteur_plateau-119])
+LMH10UU_2();
 
 support_plateau_2();
 
+/*
 module support_plateau_1()
 {
 
@@ -662,22 +663,23 @@ translate([barre_dim/2+largeur_interne/2-largeur_support/2,barre_dim/2+largeur_i
 cube([largeur_support,largeur_support,16]);
 
 }
+*/
 
 module support_plateau_2()
 {
 
 translate([milieu_X-largeur_support/2+retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-115])
     rotate([180,180,0])
-        support_LMH10UU_3();
+        support_LMH10UU_4();
 translate([milieu_X+largeur_support/2-retrait_X,largeur_interne+barre_dim/2-dist_axe,hauteur_plateau-110])
     rotate([180,0,0])
-        support_LMH10UU_3();
+        support_LMH10UU_4();
 
 translate([milieu_X-largeur_support/2+retrait_X,barre_dim/2+dist_axe,hauteur_plateau-110])
     rotate([0,180,0])
-        support_LMH10UU_3();
+        support_LMH10UU_4();
 translate([milieu_X+largeur_support/2-retrait_X,barre_dim/2+dist_axe,hauteur_plateau-115])
-    support_LMH10UU_3();
+    support_LMH10UU_4();
 
 // support plateau
 extremite = barre_dim/2+(largeur_interne-largeur_support)/2;
@@ -931,6 +933,51 @@ module support_LMH10UU_2()
     }
 }
 
+module support_LMH10UU_4()
+{
+    color("cyan")
+    translate([-30,-15,0])
+    difference()
+    {
+    union()
+        {
+            translate([0,30,0])
+                cube([60,20,5]);
+            translate([40,50,0])
+                cube([20,40,5]);
+            translate([10,15,0])
+                cube([30,15,5]);
+             translate([20,15,0])
+                cube([30,15,5]);
+            translate([30,15,0])
+                cylinder(h=5,d=40);
+            translate([20,50,0])
+                cube([25,25,5]);
+        }
+        //Palier bronze
+        translate([30,15,-0.02])
+            cylinder(h=5.04,d=14.5);
+        translate([19.5,15,-0.02])
+            cylinder(h=5.04,d=3.5);
+        translate([40.5,15,-0.02])
+            cylinder(h=5.04,d=3.5);
+        //Attache 2020
+        translate([10,40,-0.02])
+            cylinder(h=5.04,d=5.5);
+        translate([30,40,-0.02])
+            cylinder(h=5.04,d=5.5);
+        translate([50,40,-0.02])
+            cylinder(h=5.04,d=5.5);
+        translate([50,60,-0.02])
+            cylinder(h=5.04,d=5.5);
+        translate([50,80,-0.02])
+            cylinder(h=5.04,d=5.5);
+        
+        translate([28,62,-0.02])
+            cylinder(h=5.04,d=5.5);
+    }
+}
+
 module support_LMH10UU_3()
 {
     color("cyan")
@@ -1002,6 +1049,32 @@ module LMH10UU()
     }
 }
 
+module LMH10UU_2()
+{
+    color("blue")
+    difference()
+    {
+        union()
+        {
+            cylinder(h=4,d=29);
+            cylinder(h=25,d=14);
+        }
+        cylinder(h=25,d=10);
+        translate([-20,10,-0.02])
+            cube([40,8,6.04]);
+        translate([-20,-10-8,-0.02])
+            cube([40,8,6.04]);
+        translate([-10.5,0,-0.02])
+             cylinder(h=4.04,d=3.5);
+        translate([-10.5,0,-0.02])
+             cylinder(h=2.5,d=6);
+        translate([10.5,-0.02])
+             cylinder(h=4.04,d=3.5);
+        translate([10.5,0,-0.02])
+             cylinder(h=2.5,d=6);
+        
+    }
+}
 
 
 
