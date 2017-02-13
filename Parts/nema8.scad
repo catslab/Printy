@@ -181,3 +181,14 @@ module 695ZZ(){
         cylinder(d=hole,h=thickness+0.02);
     }
 }
+
+module MGN12H(){
+    color("green")
+    translate([0,0,8])
+    cube([45.4,27,10],center=true);
+}
+module RAIL12(){
+    color("Gainsboro")
+    translate([0,0,4.5])
+    cube([200,12,9],center=true);
+}

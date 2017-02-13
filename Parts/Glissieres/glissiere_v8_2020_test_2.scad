@@ -12,14 +12,14 @@ profondeur_trou_vis_3 = 22;
 x_cent_tige = 20;
 z_cent_tige = 10;
 //glissière
-diam_bague = 15.9;
+diam_bague = 16.05;
 prof_bague=12.5;
 chanfrein = 0.5;
 
 cut = 40;
 
 diff_trou = largeur+largeur/2 - (x_cent_tige+diam_tige/2);
-$fn=200;
+$fn=400;
 
 glissiere_v8();
 //attache();
@@ -74,6 +74,22 @@ difference()
         translate([0,0,0])
             linear_extrude(height=hauteur)
                 square([largeur/2+20+5,largeur/2]);
+        
+        translate([22,-1,20])
+    cube([30,2,30],center=true);
+        
+        /*
+        translate([0,-5,0])
+rotate([-90,0,0])
+ linear_extrude(height=largeur/2+5)
+            polygon( points=
+            [[0,0],//0
+            [37,0],//1
+            [37,-35],//2
+            [largeur/2,-hauteur+5],//3
+            [0,-hauteur+5],//4
+            ]);
+        */
         /*
         translate([0,0,hauteur/3])
         linear_extrude(height=hauteur/3)
@@ -90,19 +106,19 @@ linear_extrude(height=18)
             polygon( points=
             [[0,0],//0
             [14,0],//1
-            [14,-17],//2
-            [6,-17],//3
+            [14,-16],//2
+            [6,-16],//3
             [0,-12],//4
             //[12,0],//4
             ]);
     } // union
     
     //courroie
-    translate([-0.63+10,-6.5-10.5,40])
+    translate([-0.63+10,-6.5-9.5,40])
 rotate([0,90,0])
 courroie();
     
-     translate([-0.63+10,-6.5-17,40])
+     translate([-0.63+10,-6.5-16,40])
 rotate([0,90,0])
 courroie();
     
@@ -127,17 +143,17 @@ courroie();
 */
 translate([2,0,5])
 {    
-translate([20,7,15])
-    cube([20,10.02,20],center=true);
+translate([20,6,15])
+    cube([20,12.02,20],center=true);
     
-    translate([20,-0.01,15])
-        rotate([-90,0,0])
-            cylinder(h=12,d=4.5);
+    translate([20,-0.2,15])
+        rotate([90,0,0])
+            cylinder(h=2,d=5.5);
     
-    translate([40,7+0.01,15])
+    translate([40,6+0.01,15])
         rotate([0,-90,0])
             cylinder(h=12,d=4.5);
-     translate([20,7,-5.01])
+     translate([20,6,-5.01])
             cylinder(h=12,d=4.5);
     translate([10.01,12.01,15+0.01])
         rotate([90,0,0])
@@ -148,9 +164,9 @@ translate([20,7,15])
         [0,cut]
     ]);//2
     
-    translate([20,7,25-0.01])
+    translate([20,6,25-0.01])
             cylinder(h=12,d=4.5);
-    translate([20,7,30-0.01])
+    translate([20,6,30-0.01])
             cylinder(h=30,d=8.5);
         }
    
@@ -181,10 +197,10 @@ translate([20,7,15])
 module courroie(){
     //courroie 1
     color("blue")
-    translate([-0.01,0,0.01])
-        cube([20,6.51 ,0.64]);
+    translate([-0.01,0,0.01-0.1])
+        cube([20,6.51 ,0.74]);
 color("blue")
-    translate([0.01,0,0.01])
+    translate([0.01,0,0.01-0.1])
     {
         rotate([0,0,0])
         {
@@ -194,7 +210,7 @@ color("blue")
             e=.02;
             for ( i = [0 : 9] )
             {
-                translate([1+i*2,0,0.63])
+                translate([1+i*2,0,0.73])
                     rotate([-90,90,0])
                         difference()
                         {

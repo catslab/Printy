@@ -24,15 +24,21 @@ hauteur_profile = hauteur_cage + 75;
 hauteur_barre_X_bas = -45;
 longueur_sfu = 420;
 
-hauteur_plateau = -150;
+hauteur_plateau = 25;
 
-x_charriot = 0;
+x_charriot = 300;
 y_charriot = 150;
 
 
 use<charriot_v5.scad>;
 use<Hexagon-102.scad>;
 use<Glissieres/glissiere_v5.scad>;
+use<Glissieres/glissiere_v8_2020_test_2.scad>;
+use<Glissieres/glissiere_v8_mono.scad>;
+color("teal")
+translate([x_charriot+60,28,8])
+        rotate([-90,0,0])
+            cube([barre_dim,barre_dim,404]);
 
 // cadre
 color("purple")
@@ -301,18 +307,23 @@ rotate([90,0,0])
 
 
 //Supports de translation
+
 translate([x_charriot+50,28,20])
 rotate([0,90,0])
-glissiere_v5();
+glissiere_v8();
+translate([largeur_charriot+x_charriot-10,440+20-28,20])
+rotate([00,-90,180])
+mirror([1,0,0]) 
+glissiere_v8();
+
 translate([28,y_charriot+50,0])
 rotate([270,-90,0])
-glissiere_v5();
+glissiere_v8_single();
 translate([440+20-28,largeur_charriot+y_charriot+50,0])
 rotate([90,270,0])
-glissiere_v5();
-translate([largeur_charriot+x_charriot+50,440+20-28,20])
-rotate([00,90,180])
-glissiere_v5();
+glissiere_v8_single();
+
+
 
 color("black")
 {
@@ -340,6 +351,7 @@ color("black")
     cube([6,largeur_interne-36,0.63]);
 }
 
+/*
 //axes de charriot
 color("green")
 {
@@ -361,12 +373,20 @@ rotate([0,90,0])
 cylinder(h = longueur_guide,
     d=axe_diam, center=false);
 }
-
+*/
+color("green")
+{
+translate([10+18+12-10,y_charriot+80,20])
+rotate([0,90,0])
+cylinder(h = longueur_guide,
+    d=axe_diam, center=false);
+}
+/*
 color("pink")
 translate([x_charriot+50+30,y_charriot+50+30,10])
 rotate([0,0,180])
 charriot_v5();
-
+*/
 /*
 translate([x_charriot+48+32-9,y_charriot+48+32-9,-23.5-44])
 rotate([0,0,180])
@@ -375,6 +395,7 @@ translate([x_charriot+48+32+9,y_charriot+48+32+9,-23.5-44])
 rotate([0,0,0])
 hexagon_hotend();
 */
+
 translate([x_charriot+48+32,y_charriot+48+32,10])
 rotate([0,0,180])
 //hexagon_hotend();
